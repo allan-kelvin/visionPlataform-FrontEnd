@@ -1,0 +1,26 @@
+.layout-container {
+  height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background: #1c1c2b;
+  color: white;
+  padding: 1rem;
+}
+
+.logo {
+  margin-bottom: 2rem;
+}
+
+.toolbar {
+  display: flex;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  padding: 2rem;
+}

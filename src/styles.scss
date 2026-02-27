@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+/* 1️⃣ Core obrigatório */
+@include mat.core();
+
+/* 2️⃣ Criar tema Material 3 correto */
+$vision-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: mat.$green-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: Roboto,
+      plain-family: Roboto,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+/* 3️⃣ Aplicar tema */
+:root {
+  @include mat.all-component-themes($vision-theme);
+}
+
+/* 4️⃣ CSS Global */
+body {
+  margin: 0;
+  background: #0f0f1a;
+  color: white;
+  font-family: Roboto, sans-serif;
+}

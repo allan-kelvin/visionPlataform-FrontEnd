@@ -1,0 +1,77 @@
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f0f1a, #1b1b2f);
+  color: white;
+}
+
+/* LADO ESQUERDO */
+.login-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  gap: 2rem;
+}
+
+.login-illustration {
+  max-width: 100%;
+  height: auto;
+}
+
+.login-left h1 {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #5efc8d;
+}
+
+.login-left p {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.login-left img {
+  max-width: 450px;
+  width: 100%;
+}
+
+/* LADO DIREITO */
+.login-right {
+  width: 480px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.login-card {
+  width: 100%;
+  padding: 2.5rem;
+  background: rgba(30, 30, 50, 0.9);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+}
+
+.login-card h2 {
+  margin-bottom: 2rem;
+  color: #5efc8d;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 992px) {
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    width: 100%;
+  }
+}
