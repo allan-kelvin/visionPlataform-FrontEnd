@@ -1,0 +1,79 @@
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+
+  h2 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #7cffb2;
+  }
+
+  p {
+    margin: 4px 0 0;
+    opacity: 0.7;
+  }
+}
+
+.btn-novo {
+  background: linear-gradient(90deg, #00e676, #00c853);
+  color: black;
+  font-weight: 600;
+}
+
+.filter-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.descricao-field {
+  flex: 1;
+}
+
+.btn-filtrar {
+  background: linear-gradient(90deg, #00e676, #00c853);
+  color: black;
+  height: 56px;
+}
+
+.btn-excluir {
+  border-color: #ff4d4d;
+  color: #ff4d4d;
+}
+
+.btn-excluir:hover {
+  background: rgba(255, 77, 77, 0.1);
+}
+
+.table-card {
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+table {
+  width: 100%;
+}
+
+.acoes-header,
+.acoes-cell {
+  text-align: right;
+}
+
+.acoes-wrapper {
+  display: inline-flex;
+  gap: 12px;
+}
+
+mat-row:hover {
+  background: rgba(124, 255, 178, 0.05);
+}

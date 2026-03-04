@@ -12,14 +12,33 @@
       Dashboard
     </a>
 
+    <mat-expansion-panel class="submenu">
+      <mat-expansion-panel-header>
+        <mat-icon>folder</mat-icon>
+        <span>Cadastro</span>
+      </mat-expansion-panel-header>
+
+      <a routerLink="/usuarios" routerLinkActive="active">
+        Usuários
+      </a>
+
+      <a routerLink="/clientes" routerLinkActive="active">
+        Clientes
+      </a>
+
+      <a routerLink="/areas" routerLinkActive="active">
+        Áreas
+      </a>
+    </mat-expansion-panel>
+
+    <a routerLink="/planejamento" routerLinkActive="active">
+      <mat-icon>event</mat-icon>
+      Planejamento de versões
+    </a>
+
     <a routerLink="/versions" routerLinkActive="active">
       <mat-icon>inventory_2</mat-icon>
       Versões
-    </a>
-
-    <a routerLink="/users" routerLinkActive="active">
-      <mat-icon>group</mat-icon>
-      Usuários
     </a>
 
   </nav>

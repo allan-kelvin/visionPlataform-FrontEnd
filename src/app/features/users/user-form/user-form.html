@@ -1,0 +1,93 @@
+<div class="page-header">
+
+  <button class="btn-back" type="button" (click)="voltar()">
+    ← Voltar
+  </button>
+
+  <div>
+    <h2>{{ isEdit ? 'Editar Usuário' : 'Cadastrar Usuário' }}</h2>
+    <p>Preencha os dados abaixo para cadastrar um novo usuário.</p>
+  </div>
+
+</div>
+
+<form [formGroup]="form" (ngSubmit)="salvar()" class="card">
+
+  <!-- 🔥 PARTE SUPERIOR -->
+  <div class="grid-top">
+
+    <div class="input-icon">
+      <span class="icon">👤</span>
+      <input
+        type="text"
+        formControlName="nome"
+        placeholder="Digite o nome"
+      />
+    </div>
+
+    <div class="input-icon">
+      <span class="icon">✉️</span>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Digite o e-mail"
+      />
+    </div>
+
+    <div class="input-icon">
+      <span class="icon">💼</span>
+      <select formControlName="roleId">
+       <option [ngValue]="0">Selecione o cargo</option>
+        <option *ngFor="let role of roles" [ngValue]="role.id">
+          {{ role.nome }}
+        </option>
+      </select>
+    </div>
+
+  </div>
+
+  <!-- 🔥 DIVISOR -->
+  <div class="divider" *ngIf="!isEdit"></div>
+
+  <!-- 🔥 PARTE INFERIOR -->
+  <div class="grid-bottom" *ngIf="!isEdit">
+
+    <div class="input-icon">
+      <span class="icon">🔒</span>
+      <input
+        type="password"
+        formControlName="senha"
+        placeholder="Digite a senha"
+      />
+    </div>
+
+    <div class="input-icon">
+      <span class="icon">🔐</span>
+      <input
+        type="password"
+        formControlName="confirmarSenha"
+        placeholder="Confirmar senha"
+      />
+    </div>
+
+  </div>
+
+  <!-- 🔥 SWITCH ATIVO (EDIT MODE) -->
+  <div class="switch" *ngIf="isEdit">
+    <label>
+      <input type="checkbox" formControlName="ativo" />
+      Ativo
+    </label>
+  </div>
+
+  <!-- 🔥 AÇÕES -->
+  <div class="actions">
+    <button type="button" class="btn-cancel" (click)="voltar()">
+      Cancelar
+    </button>
+    <button type="submit" class="btn-save">
+      Salvar
+    </button>
+  </div>
+
+</form>

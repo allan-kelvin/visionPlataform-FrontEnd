@@ -1,0 +1,96 @@
+<div class="page-header">
+  <div>
+    <h2>Usuários</h2>
+    <p>Gerencie os usuários cadastrados no sistema.</p>
+  </div>
+
+  <button class="btn-new" (click)="novo()">+ Novo Usuário</button>
+</div>
+
+<!-- 🔥 FILTROS -->
+<div class="card filters">
+
+  <input
+    type="number"
+    [(ngModel)]="filtro.id"
+    placeholder="ID"
+  />
+
+  <input
+    type="text"
+    [(ngModel)]="filtro.nome"
+    placeholder="Digite o nome"
+  />
+
+  <select
+    class="filtro-select"
+    [(ngModel)]="filtro.roleId"
+  >
+    <option [ngValue]="0">Selecionar cargo</option>
+    <option *ngFor="let role of roles" [ngValue]="role.id">
+      {{ role.nome }}
+    </option>
+  </select>
+
+  <button class="btn-filter" (click)="filtrar()">
+    Filtrar
+  </button>
+
+</div>
+
+<!-- 🔥 TABELA -->
+<div class="card table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th class="actions-col">Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td>{{ user.id }}</td>
+        <td>{{ user.nome }}</td>
+        <td>{{ user.role }}</td>
+        <td class="actions-col">
+          <button class="btn-edit" (click)="editar(user.id)">
+            Editar
+          </button>
+          <button class="btn-delete" (click)="excluir(user.id)">
+            Excluir
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 🔥 PAGINAÇÃO -->
+  <div class="pagination" *ngIf="totalPages > 1">
+
+    <button
+      (click)="previousPage()"
+      [disabled]="page === 1"
+    >
+      ‹
+    </button>
+
+    <button
+      *ngFor="let p of pages"
+      [class.active]="page === p"
+      (click)="goToPage(p)"
+    >
+      {{ p }}
+    </button>
+
+    <button
+      (click)="nextPage()"
+      [disabled]="page === totalPages"
+    >
+      ›
+    </button>
+
+  </div>
+</div>
