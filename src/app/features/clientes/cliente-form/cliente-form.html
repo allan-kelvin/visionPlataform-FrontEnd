@@ -1,0 +1,52 @@
+<div class="page-container">
+
+  <div class="page-header">
+
+    <button mat-icon-button class="back-button" (click)="voltar()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <div>
+      <h2>{{ id ? 'Editar Cliente' : 'Cadastrar Cliente' }}</h2>
+      <p>Preencha os dados abaixo para cadastrar um cliente.</p>
+    </div>
+
+  </div>
+
+  <!-- 🔥 AGORA TEM FORM -->
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+
+    <div class="form-card">
+      <h3>Descrição</h3>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Cliente</mat-label>
+        <input
+          matInput
+          formControlName="nome"
+          placeholder="Digite nome cliente"
+        >
+      </mat-form-field>
+
+      <mat-slide-toggle formControlName="ativo">
+        Ativo
+      </mat-slide-toggle>
+
+      <div class="actions">
+        <button mat-stroked-button type="button" (click)="cancelar()">
+          Cancelar
+        </button>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>

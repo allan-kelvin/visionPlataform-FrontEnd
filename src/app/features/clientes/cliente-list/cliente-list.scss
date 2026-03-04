@@ -1,0 +1,93 @@
+.page-container {
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  color: #5efc8d;
+  margin: 0;
+}
+
+.filter-card {
+  background: linear-gradient(145deg, #1a1a2e, #11111c);
+  padding: 1.5rem;
+  border-radius: 14px;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  align-items: center;
+}
+
+.nome-field {
+  flex: 1;
+}
+
+.table-card {
+  background: linear-gradient(145deg, #1a1a2e, #11111c);
+  padding: 1.5rem;
+  border-radius: 14px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-header-cell {
+  font-weight: 600;
+  color: #5efc8d;
+}
+
+.mat-cell {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mat-paginator {
+  background: transparent;
+  color: white;
+}
+
+/* Alinhar coluna ações */
+.acoes-header {
+  text-align: right;
+  padding-right: 24px;
+}
+
+.acoes-cell {
+  justify-content: flex-end;
+  text-align: right;
+  padding-right: 24px;
+}
+
+.acoes-wrapper {
+  display: inline-flex;
+  gap: 12px;
+}
+
+.btn-excluir {
+  border-color: #ff4d4f !important;
+  color: #ff4d4f !important;
+}
+
+.btn-excluir:hover {
+  background: rgba(255, 77, 79, 0.1);
+}
+
+.btn-filtrar {
+  background: linear-gradient(135deg, #5efc8d, #3ad47b);
+  color: #000 !important;
+  font-weight: 600;
+  height: 56px;
+  padding: 0 24px;
+  border-radius: 12px;
+}
+
+.btn-filtrar:hover {
+  opacity: 0.9;
+}

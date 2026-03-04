@@ -1,0 +1,169 @@
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+
+  h2 {
+    color: #66f2a3;
+    margin: 0;
+  }
+
+  p {
+    color: #b5b5b5;
+    margin: 4px 0 0 0;
+  }
+}
+
+.btn-back {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  padding: 30px;
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 🔥 GRID SUPERIOR */
+.grid-top {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* 🔥 GRID SENHAS */
+.grid-bottom {
+  display: grid; // ✅ FALTAVA ISSO
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* 🔥 INPUTS COM ÍCONE */
+.input-icon {
+  position: relative;
+  width: 70%;
+}
+
+.input-icon input,
+.input-icon select {
+  width: 100%; // ✅ corrigido
+  height: 48px;
+  padding: 0 15px 0 45px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: white;
+  outline: none;
+  transition: 0.2s;
+  appearance: none;
+}
+
+/* 🔥 FOCUS */
+.input-icon input:focus,
+.input-icon select:focus {
+  border-color: #00c853;
+  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+}
+
+/* 🔥 SELECT DROPDOWN */
+.input-icon select {
+  cursor: pointer;
+}
+
+.input-icon select option {
+  background: #1e1e2f;
+  color: white;
+}
+
+/* 🔥 ÍCONE */
+.icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 🔥 DIVISOR */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 35px 0;
+}
+
+/* 🔥 AÇÕES */
+.actions {
+  margin-top: 35px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 8px 22px;
+  border-radius: 25px;
+  color: white;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.btn-save {
+  background: linear-gradient(90deg, #00c853, #69f0ae);
+  border: none;
+  padding: 8px 28px;
+  border-radius: 25px;
+  color: black;
+  font-weight: 600;
+  transition: 0.2s;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+form {
+  width: 100%;
+}
+
+.grid-top > *,
+.grid-bottom > * {
+  min-width: 0;
+}
+
+/* 🔥 RESPONSIVO */
+@media (max-width: 1024px) {
+  .grid-top {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-bottom {
+    grid-template-columns: 1fr;
+  }
+}

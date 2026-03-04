@@ -1,0 +1,58 @@
+.sidebar-wrapper {
+  height: 100%;
+  padding: 2rem 1rem;
+  background: linear-gradient(180deg, #161625, #0f0f1a);
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #5efc8d;
+  text-transform: lowercase;
+}
+
+.logo-icon {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #5efc8d, #3ad47b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #0f0f1a;
+  font-weight: bold;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.25s ease;
+}
+
+.menu a:hover {
+  background: rgba(94, 252, 141, 0.08);
+  color: #5efc8d;
+}
+
+.menu a.active {
+  background: linear-gradient(90deg, rgba(94, 252, 141, 0.15), transparent);
+  border-left: 3px solid #5efc8d;
+  color: #5efc8d;
+}

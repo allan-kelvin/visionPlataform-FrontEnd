@@ -3,3 +3,8 @@ export interface Area {
   descricao: string;
   ativo: boolean;
 }
+
+export interface CreateArea {
+  descricao: string;
+  ativo: boolean;
+}
