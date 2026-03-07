@@ -1,0 +1,174 @@
+<div class="modal">
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <div class="title">
+      <span class="icon">📄</span>
+
+      <h2>
+        Nova Tarefa
+        <small *ngIf="data?.version">
+          para Versão {{ data.version }}
+        </small>
+      </h2>
+    </div>
+
+    <button class="close" (click)="fechar()">✕</button>
+
+  </div>
+
+
+  <form [formGroup]="form" (ngSubmit)="salvar()">
+
+    <!-- GRID PRINCIPAL -->
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Azure Task ID</label>
+        <input formControlName="azureTaskId">
+      </div>
+
+      <div class="field">
+
+        <label>Azure Task URL</label>
+
+        <div class="azure-input">
+
+          <input formControlName="azureTaskUrl" readonly>
+
+          <button type="button" (click)="abrirAzure()" *ngIf="form.value.azureTaskUrl">
+            🔗
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="field full">
+        <label>Título</label>
+        <input formControlName="titulo">
+      </div>
+
+      <div class="field">
+        <label>Cliente</label>
+        <select formControlName="clienteId">
+          <option *ngFor="let c of clientes" [value]="c.id">
+            {{ c.nome }}
+          </option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Área</label>
+        <select formControlName="areaId">
+          <option *ngFor="let a of areas" [value]="a.id">
+            {{ a.descricao }}
+          </option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Status</label>
+        <select formControlName="statusPlanejamento">
+          <option value="Planejado">Planejado</option>
+          <option value="Desejavel">Desejável</option>
+          <option value="Confirmado">Confirmado</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Tipo</label>
+        <select formControlName="tipo">
+          <option value="">Selecione</option>
+          <option value="Correcao">Correção</option>
+          <option value="Melhoria">Melhoria</option>
+          <option value="Alteracao">Alteração</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>QA</label>
+        <select formControlName="qaUserId">
+          <option value="">Selecione</option>
+          <option *ngFor="let u of usuarios" [value]="u.id">
+            {{ u.nome }}
+          </option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <!-- SWITCHES -->
+    <div class="switch-section">
+
+      <div class="switch-row">
+
+        <span>Merge realizado</span>
+
+        <mat-slide-toggle formControlName="mergeRealizado"></mat-slide-toggle>
+
+      </div>
+
+      <div class="field full" *ngIf="form.value.mergeRealizado">
+
+        <label>Data Merge</label>
+
+        <input type="date" formControlName="dataMerge">
+
+      </div>
+
+
+      <div class="switch-row">
+
+        <span>Possui Script</span>
+
+        <mat-slide-toggle formControlName="possuiScript"></mat-slide-toggle>
+
+      </div>
+
+      <div class="field full" *ngIf="form.value.possuiScript">
+
+        <label>Descrição do Script</label>
+
+        <input formControlName="descricaoScript">
+
+      </div>
+
+
+      <div class="switch-row">
+
+        <span>Possui Tag Versão</span>
+
+        <mat-slide-toggle formControlName="possuiTagVersao"></mat-slide-toggle>
+
+      </div>
+
+      <div class="field full" *ngIf="form.value.possuiTagVersao">
+
+        <label>Nome Tag Gerada</label>
+
+        <input formControlName="tagVersao">
+
+      </div>
+
+    </div>
+
+
+    <!-- ACTIONS -->
+    <div class="actions">
+
+      <button type="button" class="cancel" (click)="fechar()">
+        Cancelar
+      </button>
+
+      <button type="submit" class="save">
+        Salvar
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
