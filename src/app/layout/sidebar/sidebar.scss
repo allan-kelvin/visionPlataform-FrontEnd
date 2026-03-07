@@ -56,3 +56,11 @@
   border-left: 3px solid #5efc8d;
   color: #5efc8d;
 }
+
+.sidebar-wrapper {
+  width: 260px;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #020617, #0f172a);
+}

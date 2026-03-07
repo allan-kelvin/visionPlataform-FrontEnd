@@ -1,0 +1,233 @@
+<div class="page-header">
+
+  <div>
+    <h2>Versões</h2>
+    <p>Gerencie versões e suas tarefas</p>
+  </div>
+
+</div>
+
+
+<!-- FILTROS -->
+
+<div class="filters">
+
+  <input type="text" placeholder="Buscar versão..." [(ngModel)]="search" (input)="applyFilters()" />
+
+  <div class="date-filter">
+
+    <label>Período:</label>
+
+    <input type="date" [(ngModel)]="startDate" (change)="applyFilters()" />
+
+    <span>até</span>
+
+    <input type="date" [(ngModel)]="endDate" (change)="applyFilters()" />
+
+  </div>
+
+  <button class="btn-refresh" (click)="atualizar()">
+    Atualizar
+  </button>
+
+</div>
+
+
+<!-- CARDS DAS VERSÕES -->
+<div class="container-cards">
+    <div class="version-card" *ngFor="let v of filteredVersions" (click)="selectVersion(v)"
+  [class.active]="selectedVersion?.id === v.id">
+
+  <div class="card-header">
+
+    <h3>{{ v.numeroVersao }}</h3>
+
+    <span class="status" [ngClass]="{
+        planejamento: v.statusVersao === 'Planejamento',
+        testes: v.statusVersao === 'EmTestes',
+        liberada: v.statusVersao === 'Liberada'
+      }">
+
+      {{ v.statusVersao }}
+
+    </span>
+
+  </div>
+
+  <div class="tasks-count">
+    {{ v.totalTarefas || 0 }} tarefas
+  </div>
+
+  <!-- CONTADORES -->
+
+  <div class="task-stats">
+
+    <span class="ok">
+      ✔ {{ v.confirmadas || 0 }}
+    </span>
+
+    <span class="warn">
+      ⭐ {{ v.desejaveis || 0 }}
+    </span>
+
+    <span class="pending">
+      ⚠ {{ v.planejadas || 0 }}
+    </span>
+
+  </div>
+
+  <div class="progress">
+
+    <div class="progress-bar" [style.width.%]="v.percentualConclusao || 0">
+    </div>
+
+  </div>
+
+  <div class="progress-label">
+    {{ v.percentualConclusao || 0 }}%
+  </div>
+
+</div>
+
+</div>
+
+
+
+<!-- DETALHES DA VERSÃO -->
+
+<div class="version-details" *ngIf="selectedVersion">
+
+  <div class="details-header">
+
+    <h2>{{ selectedVersion.numeroVersao }}</h2>
+
+    <span class="status" [ngClass]="{
+        planejamento: selectedVersion.statusVersao === 'Planejamento',
+        testes: selectedVersion.statusVersao === 'EmTestes',
+        liberada: selectedVersion.statusVersao === 'Liberada'
+      }">
+
+      {{ selectedVersion.statusVersao }}
+
+    </span>
+
+  </div>
+
+
+  <div class="details-grid">
+
+    <div>
+      <label>Limite Tarefas</label>
+      <span>
+        {{ selectedVersion.dataLimiteTarefas | date:'yyyy-MM-dd' }}
+      </span>
+    </div>
+
+    <div>
+      <label>Previsão Liberação</label>
+      <span>
+        {{ selectedVersion.dataPrevistaLiberacao | date:'yyyy-MM-dd' }}
+      </span>
+    </div>
+
+    <div>
+      <label>Liberação Real</label>
+      <span>
+        {{
+        selectedVersion.dataLiberacaoReal
+        ? (selectedVersion.dataLiberacaoReal | date:'yyyy-MM-dd')
+        : '—'
+        }}
+      </span>
+    </div>
+
+    <div>
+      <label>Criado por</label>
+      <span>—</span>
+    </div>
+
+  </div>
+
+  <div class="details-description">
+
+    {{ selectedVersion.observacoes }}
+
+  </div>
+
+</div>
+
+
+<!-- TAREFAS DA VERSÃO -->
+
+<div class="tasks-section" *ngIf="selectedVersion">
+
+  <div class="tasks-header">
+
+    <h3>Tarefas ({{ tasks.length }})</h3>
+
+    <button class="btn-add-task" (click)="abrirModal()">
+      + Adicionar Tarefa
+    </button>
+
+  </div>
+
+
+  <table class="tasks-table">
+
+    <thead>
+
+      <tr>
+        <th>#</th>
+        <th>Azure</th>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Status</th>
+        <th>QA</th>
+      </tr>
+
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let t of tasks; let i = index">
+
+        <td>{{ i + 1 }}</td>
+
+        <td>
+          <a [href]="t.azureTaskUrl" target="_blank" class="azure-link">
+
+            {{ t.azureTaskId }}
+
+          </a>
+        </td>
+
+        <td>{{ t.titulo }}</td>
+        <td>
+          <span class="badge tipo" [ngClass]="{
+          correcao: t.tipo === 'Correcao',
+          melhoria: t.tipo === 'Melhoria',
+          alteracao: t.tipo === 'Alteracao'
+        }">
+
+            {{ getTipo(t.tipo) }}
+
+          </span>>
+        </td>
+        <td>
+          <span class="badge status" [ngClass]="{
+              confirmado: t.statusPlanejamento === 'Confirmado',
+              desejavel: t.statusPlanejamento === 'Desejavel',
+              planejado: t.statusPlanejamento === 'Planejado'
+            }">
+            {{ t.statusPlanejamento }}
+          </span>
+        </td>
+        <td>{{ getQaNome(t.qaUserId) }}</td>
+
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</div>

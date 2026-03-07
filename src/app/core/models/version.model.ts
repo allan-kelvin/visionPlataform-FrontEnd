@@ -6,4 +6,10 @@ export interface Version {
   dataPrevistaLiberacao?: string;
   dataLiberacaoReal?: string;
   observacoes?: string;
+  criadoPor?: string;
+  totalTarefas?: number;
+  percentualConclusao?: number;
+  confirmadas?: number
+  desejaveis?: number
+  planejadas?: number
 }

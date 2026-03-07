@@ -88,6 +88,21 @@ export const routes: Routes = [
             .then(m => m.UserFormComponent)
       },
 
+      //Planejamento
+
+      {
+        path: 'planejamento',
+        loadComponent: () =>
+          import('./features/versions/version-page/version-page')
+            .then(m => m.VersionPageComponent)
+      },
+
+      {
+        path: 'versions',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+
       {
         path: '',
         redirectTo: 'dashboard',
