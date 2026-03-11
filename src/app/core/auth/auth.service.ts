@@ -21,6 +21,7 @@ export class AuthService {
   ) { }
 
   login(request: LoginRequest): Observable<LoginResponse> {
+
     return this.http.post<LoginResponse>(
       `${environment.apiUrl}/Auth/login`,
       request
@@ -29,6 +30,7 @@ export class AuthService {
         this.tokenStorage.setToken(response.token);
       })
     );
+
   }
 
   logout(): void {
