@@ -1,0 +1,67 @@
+<div class="page-header">
+
+  <h2>Cadastro de Versão</h2>
+
+  <p>Crie uma nova versão do sistema para planejamento de tarefas</p>
+
+</div>
+
+
+<div class="form-card">
+
+  <form [formGroup]="form">
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Número da Versão</label>
+        <input formControlName="numeroVersao">
+      </div>
+
+      <div class="field">
+        <label>Status da Versão</label>
+
+        <select formControlName="statusVersao" class="custom-select">
+          <option value="Planejamento">Planejamento</option>
+          <option value="EmTestes">Em Testes</option>
+          <option value="Liberada">Liberada</option>
+        </select>
+
+      </div>
+
+      <div class="field">
+        <label>Data Limite de Tarefas</label>
+        <input type="date" formControlName="dataLimiteTarefas">
+      </div>
+
+      <div class="field">
+        <label>Data Prevista de Liberação</label>
+        <input type="date" formControlName="dataPrevistaLiberacao">
+      </div>
+
+      <div class="field full">
+        <label>Observações</label>
+        <textarea formControlName="observacoes"></textarea>
+      </div>
+
+    </div>
+
+    <div class="actions">
+
+      <button type="button" class="btn-cancel" (click)="cancelar()">
+
+        Cancelar
+
+      </button>
+
+      <button type="button" class="btn-save" (click)="salvar()">
+
+        Salvar Versão
+
+      </button>
+
+    </div>
+
+  </form>
+
+</div>

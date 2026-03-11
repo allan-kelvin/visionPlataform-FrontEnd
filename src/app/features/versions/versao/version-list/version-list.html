@@ -1,0 +1,145 @@
+<div class="page-header">
+
+  <div>
+    <h2>Versões</h2>
+    <p>Gerencie as versões do sistema e suas informações</p>
+  </div>
+
+  <button class="btn-new" (click)="novaVersao()">
+    + Nova Versão
+  </button>
+
+</div>
+
+
+<div class="filters">
+
+  <input placeholder="Digite a versão" [(ngModel)]="search">
+
+  <select [(ngModel)]="status">
+
+    <option value="">Selecionar status</option>
+    <option value="Planejamento">Planejamento</option>
+    <option value="EmTestes">Em Testes</option>
+    <option value="Liberada">Liberada</option>
+
+  </select>
+
+  <select [(ngModel)]="creator">
+
+    <option value="">Selecionar criador</option>
+
+    <option *ngFor="let u of users" [value]="u.id">
+
+      {{ u.nome }}
+
+    </option>
+
+  </select>
+
+  <button (click)="filtrar()" class="btn-filter">
+    Filtrar
+  </button>
+
+</div>
+
+
+<table class="table">
+
+  <thead>
+
+    <tr>
+
+      <th (click)="ordenar('id')">ID</th>
+
+      <th (click)="ordenar('numeroVersao')">Versão</th>
+
+      <th>Status</th>
+
+      <th (click)="ordenar('dataLimiteTarefas')">
+        Data Limite
+      </th>
+
+      <th>Data Liberação</th>
+
+      <th>Criador</th>
+
+      <th>Observações</th>
+
+      <th>Ações</th>
+
+    </tr>
+
+  </thead>
+
+
+  <tbody>
+
+    <tr *ngFor="let v of paginated">
+
+      <td>{{ v.id }}</td>
+
+      <td>{{ v.numeroVersao }}</td>
+
+      <td>
+
+        <span class="badge" [ngClass]="v.statusVersao.toLowerCase()">
+
+          {{ v.statusVersao }}
+
+        </span>
+
+      </td>
+
+      <td>{{ v.dataLimiteTarefas | date:'yyyy-MM-dd' }}</td>
+
+      <td>
+        {{ v.dataLiberacaoReal ? (v.dataLiberacaoReal | date:'yyyy-MM-dd') : '-' }}
+      </td>
+
+      <td>{{ getCreatorName(v.criadorId) }}</td>
+
+      <td>{{ v.observacoes }}</td>
+
+      <td class="actions">
+
+  <button
+    class="btn-edit"
+    (click)="editar(v)">
+    ✏
+  </button>
+
+  <button
+    class="btn-delete"
+    (click)="confirmarExclusao(v)">
+    🗑
+  </button>
+
+</td>
+
+    </tr>
+
+  </tbody>
+
+</table>
+
+
+<div class="pagination">
+
+  <button class="page-btn" (click)="page = page - 1" [disabled]="page === 1">
+
+    ‹
+
+  </button>
+
+  <span class="page-number">
+    Página {{ page }}
+  </span>
+
+  <button class="page-btn" (click)="page = page + 1" [disabled]="page * pageSize >= filtered.length">
+
+    ›
+
+  </button>
+
+</div>

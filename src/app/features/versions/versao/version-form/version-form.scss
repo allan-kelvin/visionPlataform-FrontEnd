@@ -1,0 +1,100 @@
+.page-header {
+  margin-bottom: 20px;
+
+  h2 {
+    color: white;
+    margin: 0;
+  }
+
+  p {
+    color: #94a3b8;
+  }
+}
+
+.form-card {
+  background: rgba(255, 255, 255, 0.04);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+
+  padding: 30px;
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.field.full {
+  grid-column: span 2;
+}
+
+label {
+  font-size: 13px;
+
+  color: #9aa3b2;
+
+  margin-bottom: 6px;
+}
+
+input,
+select,
+textarea {
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.03);
+
+  color: white;
+}
+
+textarea {
+  min-height: 80px;
+}
+
+.actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 25px;
+}
+
+.custom-select {
+  appearance: none;
+
+  background: rgba(255, 255, 255, 0.03);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  color: white;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  width: 100%;
+}
+
+/* opções do select */
+
+.custom-select option {
+  background: #0f172a;
+
+  color: white;
+}

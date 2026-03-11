@@ -93,16 +93,41 @@ export const routes: Routes = [
       {
         path: 'planejamento',
         loadComponent: () =>
-          import('./features/versions/version-page/version-page')
+          import('./features/versions/versionPlanin/version-page')
             .then(m => m.VersionPageComponent)
       },
 
+      //Versões
+
       {
         path: 'versions',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
+        loadComponent: () =>
+          import('./features/versions/versao/version-list/version-list')
+            .then(m => m.VersionListComponent)
       },
 
+      {
+        path: 'versions/novo',
+        loadComponent: () =>
+          import('./features/versions/versao/version-form/version-form')
+            .then(m => m.VersionFormComponent)
+      },
+
+      {
+        path: 'versions/edit/:id',
+        loadComponent: () =>
+          import('./features/versions/versao/version-form/version-form')
+            .then(m => m.VersionFormComponent)
+      },
+
+      {
+        path: 'versions/:id',
+        loadComponent: () =>
+          import('./features/versions/versao/version-form/version-form')
+            .then(m => m.VersionFormComponent)
+      },
+
+      //dashboard
       {
         path: '',
         redirectTo: 'dashboard',

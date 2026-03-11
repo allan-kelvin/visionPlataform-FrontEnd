@@ -1,0 +1,199 @@
+.page {
+  padding: 30px;
+  color: white;
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.filters input,
+.filters select {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+.filters button {
+  background: linear-gradient(90deg, #00c853, #69f0ae);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th {
+  text-align: left;
+  color: #94a3b8;
+  padding-bottom: 10px;
+}
+
+td {
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status-testes {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.status-liberada {
+  background: rgba(0, 200, 83, 0.2);
+  color: #00c853;
+}
+
+.status-planejamento {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.status-cancelada {
+  background: rgba(255, 82, 82, 0.2);
+  color: #ff5252;
+}
+
+.filters select,
+.filters input {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.btn-new {
+  background: linear-gradient(90deg, #00c853, #69f0ae);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn-edit {
+  color: #3b82f6;
+}
+
+.btn-delete {
+  color: #ef4444;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th {
+  cursor: pointer;
+  color: #94a3b8;
+  text-align: left;
+}
+
+.table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.table td {
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.badge.emtestes {
+  background: rgba(234, 179, 8, 0.2);
+  color: #eab308;
+}
+
+.badge.liberada {
+  background: rgba(34, 197, 94, 0.2);
+  color: #22c55e;
+}
+
+.badge.planejamento {
+  background: rgba(59, 130, 246, 0.2);
+  color: #3b82f6;
+}
+
+.actions button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* SELECT DARK */
+
+.filters select {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: white;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* opções do select */
+
+.filters select option {
+  background: #0f172a;
+  color: white;
+}
+
+.pagination {
+  margin-top: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.page-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 6px;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.page-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.page-number {
+  color: #94a3b8;
+}
