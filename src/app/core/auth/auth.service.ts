@@ -56,13 +56,15 @@ export class AuthService {
   }
 
   getUserId(): string | null {
+
     const token = this.getToken();
     if (!token) return null;
 
-    const decoded = jwtDecode<JwtPayload>(token);
-    return decoded.nameid;
-  }
+    const decoded: any = jwtDecode(token);
 
+    return decoded.nameid || decoded.sub || decoded.id || null;
+
+  }
   getRole(): string | null {
     const token = this.getToken();
     if (!token) return null;

@@ -1,44 +1,105 @@
-<div class="sidebar-wrapper">
+<div class="sidebar-wrapper" [class.collapsed]="collapsed">
 
+  <!-- LOGO -->
   <div class="logo">
+
     <div class="logo-icon">✔</div>
-    <span>vision platform</span>
+
+    @if(!collapsed){
+      <span>vision platform</span>
+    }
+
   </div>
 
   <nav class="menu">
 
-    <a routerLink="/dashboard" routerLinkActive="active">
+    <!-- DASHBOARD -->
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      matTooltip="Dashboard"
+      [matTooltipDisabled]="!collapsed"
+    >
       <mat-icon>dashboard</mat-icon>
-      Dashboard
+
+      @if(!collapsed){
+        Dashboard
+      }
     </a>
 
-    <mat-expansion-panel class="submenu">
-      <mat-expansion-panel-header>
+    <!-- CADASTRO -->
+    <div class="submenu">
+
+      <div
+        class="submenu-title"
+        (click)="toggleCadastro()"
+        matTooltip="Cadastro"
+        [matTooltipDisabled]="!collapsed"
+      >
         <mat-icon>folder</mat-icon>
-        <span>Cadastro</span>
-      </mat-expansion-panel-header>
 
-      <a routerLink="/usuarios" routerLinkActive="active">
-        Usuários
-      </a>
+        @if(!collapsed){
+          Cadastro
+        }
 
-      <a routerLink="/clientes" routerLinkActive="active">
-        Clientes
-      </a>
+        @if(!collapsed){
+          <mat-icon class="arrow">
+            {{ cadastroOpen ? 'expand_less' : 'expand_more' }}
+          </mat-icon>
+        }
 
-      <a routerLink="/areas" routerLinkActive="active">
-        Áreas
-      </a>
-    </mat-expansion-panel>
+      </div>
 
-    <a routerLink="/planejamento" routerLinkActive="active">
+      @if(cadastroOpen && !collapsed){
+
+        <div class="submenu-items">
+
+          <a routerLink="/usuarios" routerLinkActive="active">
+            Usuários
+          </a>
+
+          <a routerLink="/clientes" routerLinkActive="active">
+            Clientes
+          </a>
+
+          <a routerLink="/areas" routerLinkActive="active">
+            Áreas
+          </a>
+
+        </div>
+
+      }
+
+    </div>
+
+    <!-- PLANEJAMENTO -->
+    <a
+      routerLink="/planejamento"
+      routerLinkActive="active"
+      matTooltip="Planejamento"
+      [matTooltipDisabled]="!collapsed"
+    >
       <mat-icon>event</mat-icon>
-      Planejamento de versões
+
+      @if(!collapsed){
+        Planejamento de versões
+      }
+
     </a>
 
-    <a routerLink="/versions" routerLinkActive="active">
+    <!-- VERSÕES -->
+    <a
+      routerLink="/versions"
+      routerLinkActive="active"
+      matTooltip="Versões"
+      [matTooltipDisabled]="!collapsed"
+    >
       <mat-icon>inventory_2</mat-icon>
-      Versões
+
+      @if(!collapsed){
+        Versões
+      }
+
     </a>
 
   </nav>

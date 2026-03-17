@@ -1,32 +1,69 @@
 <mat-toolbar class="header">
 
+  <!-- SIDEBAR BUTTON -->
+  <button mat-icon-button (click)="toggleSidebar.emit()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- SEARCH -->
   <div class="search-wrapper">
+
     <mat-icon>search</mat-icon>
+
     <input
       type="text"
-      placeholder="Search..."
+      placeholder="Buscar telas..."
       [(ngModel)]="search"
+      (keyup.enter)="searchPage()"
     />
+
   </div>
 
   <div class="header-right">
 
-    <!-- Notificações -->
+    <!-- NOTIFICAÇÕES -->
     <button mat-icon-button class="icon-button">
+
       <mat-icon>notifications</mat-icon>
+
       <span class="badge">2</span>
+
     </button>
 
-    <!-- Avatar -->
-    <button mat-button [matMenuTriggerFor]="menu" class="avatar-button">
-      <div class="avatar">A</div>
+    <!-- USUÁRIO -->
+    <button
+      mat-button
+      [matMenuTriggerFor]="menu"
+      class="avatar-button"
+    >
+
+      <div class="avatar">
+        {{ userInitial }}
+      </div>
+
+      <span class="user-name">
+        {{ userName }}
+      </span>
+
+      <mat-icon>expand_more</mat-icon>
+
     </button>
 
+    <!-- MENU -->
     <mat-menu #menu="matMenu">
+
+      <button mat-menu-item (click)="goToProfile()">
+        <mat-icon>person</mat-icon>
+        Meu perfil
+      </button>
+
+      <mat-divider></mat-divider>
+
       <button mat-menu-item (click)="logout()">
         <mat-icon>logout</mat-icon>
         Sair
       </button>
+
     </mat-menu>
 
   </div>
