@@ -21,6 +21,7 @@ export class AuthService {
   ) { }
 
   login(request: LoginRequest): Observable<LoginResponse> {
+
     return this.http.post<LoginResponse>(
       `${environment.apiUrl}/Auth/login`,
       request
@@ -29,6 +30,7 @@ export class AuthService {
         this.tokenStorage.setToken(response.token);
       })
     );
+
   }
 
   logout(): void {
@@ -54,13 +56,15 @@ export class AuthService {
   }
 
   getUserId(): string | null {
+
     const token = this.getToken();
     if (!token) return null;
 
-    const decoded = jwtDecode<JwtPayload>(token);
-    return decoded.nameid;
-  }
+    const decoded: any = jwtDecode(token);
 
+    return decoded.nameid || decoded.sub || decoded.id || null;
+
+  }
   getRole(): string | null {
     const token = this.getToken();
     if (!token) return null;

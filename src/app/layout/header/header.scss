@@ -1,19 +1,23 @@
 .header {
-  background: linear-gradient(90deg, #18182a, #11111c);
-  padding: 0 2rem;
+  height: 80px;
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 0 24px;
+  background: linear-gradient(180deg, #020617, #0f172a);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* SEARCH */
 
 .search-wrapper {
   display: flex;
   align-items: center;
   gap: 8px;
   background: rgba(255, 255, 255, 0.05);
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
-  width: 320px;
+  width: 340px;
 }
 
 .search-wrapper input {
@@ -24,11 +28,17 @@
   width: 100%;
 }
 
+/* lado direito */
+
 .header-right {
+  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
+  padding-right: 10px;
 }
+
+/* notificações */
 
 .icon-button {
   position: relative;
@@ -37,8 +47,8 @@
 
 .badge {
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 4px;
+  right: 4px;
   background: #5efc8d;
   color: black;
   font-size: 10px;
@@ -46,8 +56,15 @@
   padding: 2px 5px;
 }
 
+/* avatar */
+
 .avatar-button {
-  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: background 0.2s;
 }
 
 .avatar {
@@ -58,6 +75,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0f0f1a;
+  color: #020617;
   font-weight: bold;
+}
+
+.user-name {
+  font-size: 14px;
+  opacity: 0.9;
 }

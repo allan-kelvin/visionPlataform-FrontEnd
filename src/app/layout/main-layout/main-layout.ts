@@ -18,6 +18,11 @@ import { SidebarComponent } from '../sidebar/sidebar';
   ],
 })
 export class MainLayoutComponent {
-  constructor(private authService: AuthService) { }
 
+
+  constructor(private authService: AuthService) { }
+  collapsed = false;
+  toggleSidebar() {
+    this.collapsed = !this.collapsed;
+  }
 }

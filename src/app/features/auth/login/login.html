@@ -2,16 +2,11 @@
 
   <!-- LADO ESQUERDO -->
   <div class="login-left">
-    <div class="brand">
-      <h1>Vision Platform</h1>
-      <p>O seu ERP de controle de Qualidade</p>
-    </div>
-
-  <img
-  src="/login-banner.png"
-  alt="Ilustração QA Vision Platform"
-  class="login-illustration"
-/>
+    <img
+      src="/Banner-Login.png"
+      alt="Ilustração QA Vision Platform"
+      class="login-illustration"
+    />
   </div>
 
   <!-- LADO DIREITO -->
@@ -23,17 +18,65 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
+        <!-- EMAIL -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>E-mail</mat-label>
-          <input matInput formControlName="email" type="email">
+
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            placeholder="Digite seu e-mail"
+          />
+
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">
+            O e-mail é obrigatório
+          </mat-error>
+
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">
+            E-mail inválido
+          </mat-error>
+
         </mat-form-field>
 
+        <!-- SENHA -->
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Senha</mat-label>
-          <input matInput formControlName="password" type="password">
+
+          <input
+            matInput
+            formControlName="password"
+            [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Digite sua senha"
+          />
+
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hidePassword = !hidePassword"
+          >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            A senha é obrigatória
+          </mat-error>
+
         </mat-form-field>
 
-        <button mat-raised-button color="primary" class="full-width" [disabled]="loading">
+        <!-- ERRO LOGIN -->
+        <div class="login-error" *ngIf="loginError">
+          Usuário ou senha inválidos
+        </div>
+
+        <!-- BOTÃO -->
+        <button
+          mat-raised-button
+          color="primary"
+          class="login-button"
+          [disabled]="loginForm.invalid || loading"
+        >
 
           @if (!loading) {
           ENTRAR

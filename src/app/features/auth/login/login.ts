@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 
+import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../core/auth/auth.service';
 import { LoginRequest } from '../../../core/models/login-request.model';
 
@@ -21,7 +22,8 @@ import { LoginRequest } from '../../../core/models/login-request.model';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
@@ -31,6 +33,8 @@ export class LoginComponent {
 
   loginForm: FormGroup;
   loading = false;
+  hidePassword = true;
+  loginError = false;
 
   constructor(
     private fb: FormBuilder,
@@ -45,18 +49,27 @@ export class LoginComponent {
 
   onSubmit(): void {
 
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid || this.loading) {
+      return;
+    }
 
     this.loading = true;
+    this.loginError = false;
 
     const request: LoginRequest = this.loginForm.value;
 
     this.authService.login(request).subscribe({
+
       next: () => {
         this.router.navigate(['/dashboard']);
       },
-      error: () => {
+
+      error: (err) => {
+
+        console.error(err);
+
         this.loading = false;
+        this.loginError = true;
       }
     });
   }
