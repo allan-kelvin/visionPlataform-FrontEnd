@@ -20,15 +20,16 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
     MatPaginatorModule,
     MatButtonModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './cliente-list.html',
   styleUrl: './cliente-list.scss',
 })
 export class ClienteListComponent implements OnInit {
-
   displayedColumns: string[] = ['id', 'nome', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>();
+  sortField: keyof Cliente = 'id';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   filtroForm!: FormGroup;
 
@@ -37,11 +38,11 @@ export class ClienteListComponent implements OnInit {
   constructor(
     private service: ClienteService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.filtroForm = this.fb.group({
       id: [''],
-      nome: ['']
+      nome: [''],
     });
   }
 
@@ -50,7 +51,7 @@ export class ClienteListComponent implements OnInit {
   }
 
   load() {
-    this.service.getAll().subscribe(data => {
+    this.service.getAll().subscribe((data) => {
       this.dataSource.data = data;
       this.dataSource.paginator = this.paginator;
     });
@@ -84,4 +85,32 @@ export class ClienteListComponent implements OnInit {
     }
   }
 
+  selectedRow: any = null;
+
+  selectRow(row: any) {
+    this.selectedRow = row;
+  }
+
+  onRowDoubleClick(row: any) {
+    this.selectedRow = row;
+    this.editar(row.id);
+  }
+
+  sort(field: keyof Cliente) {
+    if (this.sortField === field) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortField = field;
+      this.sortDirection = 'asc';
+    }
+
+    this.dataSource.data = [...this.dataSource.data].sort((a, b) => {
+      const valueA = a[field];
+      const valueB = b[field];
+
+      if (valueA < valueB) return this.sortDirection === 'asc' ? -1 : 1;
+      if (valueA > valueB) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
 }

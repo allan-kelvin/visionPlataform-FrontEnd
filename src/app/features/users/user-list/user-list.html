@@ -1,96 +1,97 @@
-<div class="page-header">
-  <div>
-    <h2>Usuários</h2>
-    <p>Gerencie os usuários cadastrados no sistema.</p>
+<div class="page-container">
+  <div class="page-header">
+    <div class="title-group">
+      <h2 class="neon-title">Usuários</h2>
+      <p>Gerencie os usuários cadastrados no sistema.</p>
+    </div>
+
+    <button class="btn-primary" (click)="novo()">
+      + Novo Usuário
+    </button>
   </div>
 
-  <button class="btn-new" (click)="novo()">+ Novo Usuário</button>
-</div>
+  <!-- 🔥 FILTROS -->
+  <div class="card filters">
 
-<!-- 🔥 FILTROS -->
-<div class="card filters">
+    <div class="form-group">
+      <label>ID</label>
+      <input type="number" [(ngModel)]="filtro.id" placeholder="Ex: 1" />
+    </div>
 
-  <input
-    type="number"
-    [(ngModel)]="filtro.id"
-    placeholder="ID"
-  />
+    <div class="form-group">
+      <label>Nome</label>
+      <input type="text" [(ngModel)]="filtro.nome" placeholder="Descrição" />
+    </div>
 
-  <input
-    type="text"
-    [(ngModel)]="filtro.nome"
-    placeholder="Digite o nome"
-  />
+    <div class="form-group select-group">
+      <label>Cargo</label>
 
-  <select
-    class="filtro-select"
-    [(ngModel)]="filtro.roleId"
-  >
-    <option [ngValue]="0">Selecionar cargo</option>
-    <option *ngFor="let role of roles" [ngValue]="role.id">
-      {{ role.nome }}
-    </option>
-  </select>
+      <ng-select [items]="roles" bindLabel="nome" bindValue="id" [(ngModel)]="filtro.roleId" class="custom-select"
+        [clearable]="true" [searchable]="true" appendTo="body">
+      </ng-select>
 
-  <button class="btn-filter" (click)="filtrar()">
-    Filtrar
-  </button>
+    </div>
 
-</div>
+    <!-- 🔥 BOTÃO NA MESMA LINHA -->
+    <div class="form-group button-group">
+      <button class="btn-primary full" (click)="filtrar()">
+        Filtrar
+      </button>
+    </div>
 
-<!-- 🔥 TABELA -->
-<div class="card table-card">
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Cargo</th>
-        <th class="actions-col">Ações</th>
-      </tr>
-    </thead>
+  </div>
 
-    <tbody>
-      <tr *ngFor="let user of paginatedUsers">
-        <td>{{ user.id }}</td>
-        <td>{{ user.nome }}</td>
-        <td>{{ user.role }}</td>
-        <td class="actions-col">
-          <button class="btn-edit" (click)="editar(user.id)">
-            Editar
-          </button>
-          <button class="btn-delete" (click)="excluir(user.id)">
-            Excluir
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- 🔥 TABELA -->
+  <div class="card table-card">
 
-  <!-- 🔥 PAGINAÇÃO -->
-  <div class="pagination" *ngIf="totalPages > 1">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Cargo</th>
+          <th class="actions-col">Ações</th>
+        </tr>
+      </thead>
 
-    <button
-      (click)="previousPage()"
-      [disabled]="page === 1"
-    >
-      ‹
-    </button>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers">
+          <td>{{ user.id }}</td>
+          <td>{{ user.nome }}</td>
+          <td>{{ user.role }}</td>
 
-    <button
-      *ngFor="let p of pages"
-      [class.active]="page === p"
-      (click)="goToPage(p)"
-    >
-      {{ p }}
-    </button>
+          <td class="actions-col">
+            <button class="btn-edit" (click)="editar(user.id)">
+             <mat-icon>edit</mat-icon>
+             Editar
+            </button>
+            <button class="btn-delete" (click)="excluir(user.id)">
+             <mat-icon>delete</mat-icon>
+             Excluir
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-    <button
-      (click)="nextPage()"
-      [disabled]="page === totalPages"
-    >
-      ›
-    </button>
+    <!-- 🔥 PAGINAÇÃO NOVA -->
+    <div class="pagination" *ngIf="totalPages > 1">
+
+      <div class="pagination-info">
+        Mostrando {{ paginatedUsers.length }} de {{ users.length }} usuários
+      </div>
+
+      <div class="pagination-controls">
+        <button (click)="previousPage()" [disabled]="page === 1">‹</button>
+
+        <button *ngFor="let p of pages" [class.active]="page === p" (click)="goToPage(p)">
+          {{ p }}
+        </button>
+
+        <button (click)="nextPage()" [disabled]="page === totalPages">›</button>
+      </div>
+
+    </div>
 
   </div>
 </div>

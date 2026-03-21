@@ -1,143 +1,337 @@
+/* 🔥 NEON TITLE */
+.neon-title {
+  font-size: 35px;
+  color: #fcfcfc;
+}
+
+.icone-usuario {
+  max-width: 50px;
+  color: white;
+}
+
+.page-container {
+  padding: 10px 20px;
+  margin: 0 auto;
+}
+/* HEADER */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-
-  h2 {
-    color: #66f2a3;
-    margin: 0;
-  }
-
-  p {
-    color: #ccc;
-    margin: 4px 0 0 0;
-  }
+  margin-bottom: 30px;
 }
 
+.title-group p {
+  color: #9aa4b2;
+  margin-top: 5px;
+}
+
+/* CARD */
 .card {
   background: rgba(255, 255, 255, 0.03);
+  border-radius: 18px;
   padding: 20px;
-  border-radius: 16px;
-  backdrop-filter: blur(20px);
-  margin-bottom: 20px;
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  z-index: 1;
+  margin-bottom: 25px;
 }
 
+/* 🔥 FILTROS EM LINHA */
 .filters {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr auto;
   gap: 15px;
+  align-items: end;
+}
+
+/* FORM */
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    font-size: 12px;
+    color: #9aa4b2;
+    margin-bottom: 6px;
+  }
 
   input,
   select {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 8px;
-    color: white;
-    flex: 1;
+    height: 42px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    outline: none;
+    transition: 0.2s;
+  }
+
+  input:focus,
+  select:focus {
+    border-color: #00c853;
+    box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
   }
 }
 
-.btn-filter {
-  background: linear-gradient(90deg, #00c853, #69f0ae);
+/* BOTÃO */
+.btn-primary {
+  background: linear-gradient(135deg, #00c853, #69f0ae);
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
+  height: 42px;
+  padding: 0 20px;
+  border-radius: 10px;
   font-weight: 600;
-  color: black;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.btn-new {
-  background: linear-gradient(90deg, #00c853, #69f0ae);
-  border: none;
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-weight: 600;
-  color: black;
+.btn-primary.full {
+  width: 100%;
 }
 
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
+}
+
+/* TABELA */
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* 🔥 EVITA BUG DE SOBREPOSIÇÃO */
+.table-card {
+  overflow: visible;
 }
 
 th,
 td {
-  padding: 12px;
+  padding: 14px 16px;
   text-align: left;
 }
 
-thead {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* ZEBRA */
+tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
-tbody tr {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
 }
+
+tbody tr:hover {
+  background: rgba(0, 255, 170, 0.08);
+}
+
+/* AÇÕES */
 
 .actions-col {
-  text-align: right;
+  display: flex;
+  gap: 8px;
 }
 
-.btn-edit {
-  background: #00c853;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 20px;
-  margin-right: 5px;
-  color: white;
+th:nth-child(1),
+td:nth-child(1) {
+  width: 80px;
 }
 
+th:nth-child(2),
+td:nth-child(2) {
+  width: 40%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 10%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  text-align: center;
+  width: 180px;
+}
+
+/* 🔥 BOTÕES COM HOVER TOP */
+/* BOTÕES */
+.btn-edit,
 .btn-delete {
-  background: #e53935;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 12px;
   border: none;
-  padding: 6px 12px;
-  border-radius: 20px;
-  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
 }
 
+.btn-edit:hover,
+.btn-delete:hover {
+  transform: translateY(-1px);
+}
+
+/* EDITAR */
+.btn-edit {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+
+  &:hover {
+    background: #22c55e;
+    color: white;
+  }
+}
+
+/* EXCLUIR */
+.btn-delete {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+
+  &:hover {
+    background: #ef4444;
+    color: white;
+  }
+}
+
+/* 🔥 GARANTE TAMANHO IGUAL AOS INPUTS */
+.select-group ng-select {
+  width: 100%;
+}
+
+/* 🔥 CONTAINER PRINCIPAL */
+::ng-deep .ng-select.custom-select {
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+/* 🔥 REMOVE FUNDO BUGADO */
+::ng-deep .ng-select.custom-select {
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+::ng-deep .ng-select-container {
+  background: transparent !important;
+  border: none !important;
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .ng-value,
+::ng-deep .ng-input input {
+  color: #fff;
+}
+
+::ng-deep .ng-placeholder {
+  color: #9aa4b2;
+}
+
+::ng-deep .ng-dropdown-panel {
+  z-index: 9999 !important;
+  margin-top: 6px;
+  background: #1e1e2f;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+::ng-deep .ng-option {
+  padding: 10px 12px;
+  color: #fff;
+}
+
+::ng-deep .ng-option:hover {
+  background: rgba(0, 255, 170, 0.15);
+}
+
+::ng-deep .ng-option-selected {
+  background: rgba(0, 200, 83, 0.25);
+}
+
+::ng-deep .ng-select.ng-select-focused {
+  border-color: #00c853;
+  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+}
+/* 🔥 OPÇÕES */
+::ng-deep .ng-option {
+  padding: 10px 12px;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* 🔥 HOVER */
+::ng-deep .ng-option:hover {
+  background: rgba(0, 255, 170, 0.15);
+}
+
+/* 🔥 SELECIONADO */
+::ng-deep .ng-option-selected {
+  background: rgba(0, 200, 83, 0.25);
+}
+
+/* 🔥 FOCO (BORDA VERDE IGUAL INPUT) */
+::ng-deep .ng-select.ng-select-focused {
+  border-color: #00c853;
+  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+}
+/* 🔥 PAGINAÇÃO TOP */
 .pagination {
   display: flex;
-  justify-content: flex-end;
-  gap: 6px;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 15px;
+}
+
+.pagination-info {
+  color: #9aa4b2;
+  font-size: 13px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 6px;
 
   button {
-    background: rgba(255, 255, 255, 0.05);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     border: none;
-    padding: 6px 10px;
-    border-radius: 6px;
-    color: white;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  button:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .active {
     background: #00c853;
     color: black;
-    font-weight: 600;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
   }
 }
 
-/* 🔥 SELECT FILTRO */
-.filtro-select {
-  width: 100%;
-  height: 45px;
-  padding: 0 40px 0 15px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  outline: none;
-  appearance: none;
-  cursor: pointer;
-}
-
-.filtro-select:focus {
-  border-color: #00c853;
-  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
-}
-
-/* Dropdown */
-.filtro-select option {
-  background: #1e1e2f;
-  color: white;
+@media (max-width: 768px) {
+  .page-container {
+    padding: 20px;
+  }
 }

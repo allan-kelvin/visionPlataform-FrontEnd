@@ -1,80 +1,83 @@
-<div class="page-header">
-  <div>
-    <h2>Áreas</h2>
-    <p>Gerencie as áreas cadastradas no sistema.</p>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <h2>Áreas</h2>
+      <p>Gerencie as áreas cadastradas no sistema.</p>
+    </div>
+
+    <button mat-raised-button class="btn-primary" (click)="novo()">
+      <mat-icon>add</mat-icon>
+      Nova Área
+    </button>
   </div>
 
-  <button mat-raised-button class="btn-novo" (click)="novo()">
-    <mat-icon>add</mat-icon>
-    Nova Área
-  </button>
-</div>
+  <!-- FILTROS -->
+  <div class="filters">
 
-<!-- CARD FILTROS -->
-<div class="filter-card">
+    <div class="field">
+      <label>ID</label>
+      <input matInput [(ngModel)]="filtroId" placeholder="Buscar por ID">
+    </div>
 
-  <mat-form-field appearance="outline">
-    <mat-label>ID</mat-label>
-    <input matInput [(ngModel)]="filtroId">
-  </mat-form-field>
+    <div class="field">
+      <label>Descrição</label>
+      <input matInput [(ngModel)]="filtroDescricao" placeholder="Buscar descrição">
+    </div>
 
-  <mat-form-field appearance="outline" class="descricao-field">
-    <mat-label>Descrição</mat-label>
-    <input matInput [(ngModel)]="filtroDescricao">
-  </mat-form-field>
+    <button class="btn-filter" (click)="aplicarFiltro()">
+      Filtrar
+    </button>
 
-  <button mat-raised-button class="btn-filtrar" (click)="aplicarFiltro()">
-    Filtrar
-  </button>
+  </div>
 
-</div>
+  <!-- TABELA -->
+  <div class="table-card">
 
-<!-- TABELA -->
-<div class="table-card">
+    <table mat-table [dataSource]="dataSource">
 
-  <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let area">{{ area.id }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>ID</th>
-      <td mat-cell *matCellDef="let area">{{ area.id }}</td>
-    </ng-container>
+      <ng-container matColumnDef="descricao">
+        <th mat-header-cell *matHeaderCellDef>Descrição</th>
+        <td mat-cell *matCellDef="let area">{{ area.descricao }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="descricao">
-      <th mat-header-cell *matHeaderCellDef>Descrição</th>
-      <td mat-cell *matCellDef="let area">{{ area.descricao }}</td>
-    </ng-container>
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef class="acoes-header">
+          Ações
+        </th>
 
-    <ng-container matColumnDef="acoes">
-      <th mat-header-cell *matHeaderCellDef class="acoes-header">
-        Ações
-      </th>
+        <td mat-cell *matCellDef="let area" class="acoes-cell">
+          <div class="acoes-wrapper">
 
-      <td mat-cell *matCellDef="let area" class="acoes-cell">
-        <div class="acoes-wrapper">
+            <button class="btn-edit" (click)="editar(area.id)">
+              <mat-icon>edit</mat-icon>
+              Editar
+            </button>
 
-          <button mat-stroked-button color="primary"
-                  (click)="editar(area.id)">
-            <mat-icon>edit</mat-icon>
-            Editar
-          </button>
+            <button class="btn-delete" (click)="excluir(area.id)">
+              <mat-icon>delete</mat-icon>
+              Excluir
+            </button>
 
-          <button mat-stroked-button color="warn"
-                  (click)="excluir(area.id)">
-            <mat-icon>delete</mat-icon>
-            Excluir
-          </button>
+          </div>
+        </td>
+      </ng-container>
 
-        </div>
-      </td>
-    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
-  </table>
+    <mat-paginator [pageSize]="5"
+                   [pageSizeOptions]="[5,10,20]">
+    </mat-paginator>
 
-  <mat-paginator [pageSize]="5"
-                 [pageSizeOptions]="[5,10,20]">
-  </mat-paginator>
+  </div>
 
 </div>
