@@ -2,69 +2,75 @@
 
   <!-- HEADER -->
   <div class="page-header">
-    <div>
-      <h2>Clientes</h2>
+    <div class="title-group">
+      <h2 class="neon-title">Clientes</h2>
       <p>Gerencie os clientes cadastrados no sistema.</p>
     </div>
 
-    <button mat-raised-button color="primary" (click)="novo()">
-      <mat-icon>add</mat-icon>
-      Novo Cliente
+    <button class="btn-primary" (click)="novo()">
+      + Novo Cliente
     </button>
   </div>
 
-  <!-- FILTRO -->
-  <div class="filter-card" [formGroup]="filtroForm">
+  <!-- FILTROS -->
+  <div class="card filters" [formGroup]="filtroForm">
 
-    <mat-form-field appearance="outline">
-      <mat-label>ID</mat-label>
-      <input matInput formControlName="id" placeholder="ID">
-    </mat-form-field>
+    <div class="form-group">
+      <label>ID</label>
+      <input formControlName="id" placeholder="Ex: 1">
+    </div>
 
-    <mat-form-field appearance="outline" class="nome-field">
-      <mat-label>Nome</mat-label>
-      <input matInput formControlName="nome" placeholder="Digite nome cliente">
-    </mat-form-field>
+    <div class="form-group">
+      <label>Nome</label>
+      <input formControlName="nome" placeholder="Digite o nome">
+    </div>
 
-    <button mat-raised-button class="btn-filtrar" (click)="filtrar()">
-      Filtrar
-    </button>
+    <div class="form-group button-group">
+      <button class="btn-primary full" (click)="filtrar()">
+        Filtrar
+      </button>
+    </div>
+
   </div>
 
   <!-- TABELA -->
-  <div class="table-card">
+  <div class="card table-card">
 
     <table mat-table [dataSource]="dataSource">
 
       <!-- ID -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <th mat-header-cell *matHeaderCellDef (click)="sort('id')">
+          ID
+        </th>
         <td mat-cell *matCellDef="let cliente">{{ cliente.id }}</td>
       </ng-container>
 
       <!-- Nome -->
       <ng-container matColumnDef="nome">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <th mat-header-cell *matHeaderCellDef (click)="sort('nome')">
+          Nome
+        </th>
         <td mat-cell *matCellDef="let cliente">{{ cliente.nome }}</td>
       </ng-container>
 
       <!-- Ações -->
       <ng-container matColumnDef="acoes">
-        <th mat-header-cell *matHeaderCellDef class="acoes-header">
+        <th mat-header-cell *matHeaderCellDef class="actions-col">
           Ações
         </th>
 
-        <td mat-cell *matCellDef="let cliente" class="acoes-cell">
+        <td mat-cell *matCellDef="let cliente" class="actions-col">
 
-          <div class="acoes-wrapper">
-            <button mat-stroked-button color="primary" class="btn-editar" (click)="editar(cliente.id)">
+          <div class="actions-wrapper">
+            <button class="btn-edit" (click)="editar(cliente.id); $event.stopPropagation()">
               <mat-icon>edit</mat-icon>
               Editar
             </button>
 
-            <button mat-stroked-button class="btn-excluir" (click)="excluir(cliente.id)">
+            <button class="btn-delete" (click)="excluir(cliente.id); $event.stopPropagation()">
               <mat-icon>delete</mat-icon>
-              Excluir
+               Excluir
             </button>
           </div>
 
@@ -72,10 +78,12 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onRowDoubleClick(row)"
+        (click)="selectedRow(row)" [class.row-selected]="selectedRow?.id === row.id"></tr>
 
     </table>
 
+    <!-- PAGINAÇÃO -->
     <mat-paginator [pageSize]="5"></mat-paginator>
 
   </div>
