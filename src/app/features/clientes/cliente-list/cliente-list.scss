@@ -1,15 +1,8 @@
-/* 🔥 CONTAINER */
+/* CONTAINER */
 .page-container {
   padding: 10px 20px;
   margin: 0 auto;
 }
-
-/* 🔥 NEON TITLE */
-.neon-title {
-  font-size: 28px;
-  color: #fff;
-}
-
 /* HEADER */
 .page-header {
   display: flex;
@@ -32,55 +25,85 @@
   margin-bottom: 20px;
 }
 
-/* 🔥 FILTROS */
+/* FILTROS */
 .filters {
   display: grid;
-  grid-template-columns: 120px 1fr 140px;
-  gap: 15px;
+  grid-template-columns: 120px 1fr auto;
+  gap: 10px;
   align-items: end;
+  padding: 15px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.container-filters {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 3px;
 }
 
 /* FORM */
+
+.form-group.button-group {
+  display: flex;
+  flex-wrap: wrap;
+}
 .form-group {
   display: flex;
   flex-direction: column;
+}
 
-  label {
-    font-size: 12px;
-    color: #9aa4b2;
-    margin-bottom: 6px;
-  }
+.form-group label {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 6px;
+}
 
-  input {
-    height: 42px;
-    padding: 0 12px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-  }
+.form-group input {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  outline: none;
+}
+
+//BOTOES AO LADO
+.form-group input {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+  outline: none;
 }
 
 /* BOTÃO */
 .btn-primary {
-  background: linear-gradient(135deg, #00c853, #69f0ae);
-  border: none;
-  height: 42px;
-  padding: 0 20px;
+  height: 40px;
+  padding: 0 16px;
   border-radius: 10px;
+  font-size: 13px;
   font-weight: 600;
-  color: #000;
+  white-space: nowrap;
+
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: 0.2s;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
 }
 
 .btn-primary.full {
-  width: 60%;
   padding: 0px 20px;
 }
 

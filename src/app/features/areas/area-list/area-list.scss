@@ -24,7 +24,7 @@
 
 /* BOTÃO PRINCIPAL */
 .btn-primary {
-  background: linear-gradient(135deg, #00c853, #69f0ae);
+  background: linear-gradient(135deg, #00c853, #3b8a64);
   border: none;
   height: 42px;
   padding: 0 20px;
@@ -58,6 +58,11 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
 
   align-items: end;
+}
+
+.container-filters button {
+  color: #fff;
+  font-weight: bold;
 }
 
 .field {

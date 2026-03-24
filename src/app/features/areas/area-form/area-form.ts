@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AreaService } from '../../../core/services/area.service';
+import { NotificationService } from '../../../core/services/notifications/notification.service';
 
 @Component({
   selector: 'app-area-form',
@@ -27,6 +28,7 @@ export class AreaFormComponent implements OnInit {
 
   id?: number;
   form!: ReturnType<FormBuilder['group']>;
+  private notify = inject(NotificationService);
 
   constructor(
     private fb: FormBuilder,
@@ -56,14 +58,36 @@ export class AreaFormComponent implements OnInit {
   }
 
   salvar() {
-    if (this.form.invalid) return;
+    // 🔥 validação
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+
+      this.notify.error('Preencha os campos obrigatórios!');
+      return;
+    }
+
+    const dto = this.form.getRawValue();
 
     if (this.id) {
-      this.service.update(this.id, this.form.value as any)
-        .subscribe(() => this.voltar());
+      this.service.update(this.id, dto).subscribe({
+        next: () => {
+          this.notify.success('Área atualizada com sucesso!');
+          this.voltar();
+        },
+        error: () => {
+          this.notify.error('Erro ao atualizar área!');
+        }
+      });
     } else {
-      this.service.create(this.form.value as any)
-        .subscribe(() => this.voltar());
+      this.service.create(dto).subscribe({
+        next: () => {
+          this.notify.success('Área cadastrada com sucesso!');
+          this.voltar();
+        },
+        error: () => {
+          this.notify.error('Erro ao cadastrar área!');
+        }
+      });
     }
   }
 

@@ -6,11 +6,6 @@
       <h2>Áreas</h2>
       <p>Gerencie as áreas cadastradas no sistema.</p>
     </div>
-
-    <button mat-raised-button class="btn-primary" (click)="novo()">
-      <mat-icon>add</mat-icon>
-      Nova Área
-    </button>
   </div>
 
   <!-- FILTROS -->
@@ -26,9 +21,17 @@
       <input matInput [(ngModel)]="filtroDescricao" placeholder="Buscar descrição">
     </div>
 
-    <button class="btn-filter" (click)="aplicarFiltro()">
-      Filtrar
-    </button>
+    <div class="container-filters">
+      <button class="btn-filter" (click)="aplicarFiltro()">
+        Filtrar
+      </button>
+
+       <button mat-raised-button class="btn-primary" (click)="novo()">
+          <mat-icon>add</mat-icon>
+            Nova Área
+      </button>
+    </div>
+
 
   </div>
 

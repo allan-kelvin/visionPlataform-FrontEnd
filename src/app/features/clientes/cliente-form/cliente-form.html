@@ -1,48 +1,57 @@
 <div class="page-container">
 
   <div class="page-header">
-
-    <button mat-icon-button class="back-button" (click)="voltar()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-
     <div>
       <h2>{{ id ? 'Editar Cliente' : 'Cadastrar Cliente' }}</h2>
       <p>Preencha os dados abaixo para cadastrar um cliente.</p>
     </div>
-
   </div>
 
-  <!-- 🔥 AGORA TEM FORM -->
   <form [formGroup]="form" (ngSubmit)="salvar()">
 
     <div class="form-card">
+
       <h3>Descrição</h3>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Cliente</mat-label>
-        <input
-          matInput
-          formControlName="nome"
-          placeholder="Digite nome cliente"
-        >
-      </mat-form-field>
 
-      <mat-slide-toggle formControlName="ativo">
-        Ativo
-      </mat-slide-toggle>
+      <!--LINHA -->
+      <div class="row">
 
+        <!-- INPUT -->
+        <div class="field">
+          <label>Cliente</label>
+
+          <input class="input" formControlName="nome" placeholder="Digite nome cliente" />
+
+          <span class="error" *ngIf="form.get('nome')?.touched && form.get('nome')?.invalid">
+            Nome é obrigatório
+          </span>
+        </div>
+
+        <!-- ATIVO -->
+        <div class="ativo">
+          <mat-slide-toggle formControlName="ativo">
+            Ativo
+          </mat-slide-toggle>
+        </div>
+
+      </div>
+
+      <!-- AÇÕES -->
       <div class="actions">
-        <button mat-stroked-button type="button" (click)="cancelar()">
+
+        <button type="button" class="btn-back" (click)="voltar()">
+          <mat-icon>arrow_back</mat-icon>
+          Voltar
+        </button>
+
+        <button type="button" class="btn-cancel" (click)="cancelar()">
           Cancelar
         </button>
 
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-        >
+        <button type="submit" class="btn-save">
           Salvar
         </button>
+
       </div>
 
     </div>

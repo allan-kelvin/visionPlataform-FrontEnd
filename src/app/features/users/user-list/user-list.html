@@ -4,13 +4,9 @@
       <h2 class="neon-title">Usuários</h2>
       <p>Gerencie os usuários cadastrados no sistema.</p>
     </div>
-
-    <button class="btn-primary" (click)="novo()">
-      + Novo Usuário
-    </button>
   </div>
 
-  <!-- 🔥 FILTROS -->
+  <!-- FILTROS -->
   <div class="card filters">
 
     <div class="form-group">
@@ -25,23 +21,22 @@
 
     <div class="form-group select-group">
       <label>Cargo</label>
-
       <ng-select [items]="roles" bindLabel="nome" bindValue="id" [(ngModel)]="filtro.roleId" class="custom-select"
         [clearable]="true" [searchable]="true" appendTo="body">
       </ng-select>
-
     </div>
 
-    <!-- 🔥 BOTÃO NA MESMA LINHA -->
-    <div class="form-group button-group">
-      <button class="btn-primary full" (click)="filtrar()">
+    <div class="container-filters">
+      <button class="btn-primary" (click)="filtrar()">
         Filtrar
       </button>
+
+      <button class="btn-primary" (click)="novo()">
+        + Novo Usuário
+      </button>
     </div>
-
   </div>
-
-  <!-- 🔥 TABELA -->
+  <!--TABELA -->
   <div class="card table-card">
 
     <table>

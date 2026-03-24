@@ -1,78 +1,113 @@
 <div class="page-header">
-
-  <button class="btn-back" type="button" (click)="voltar()">
-    ← Voltar
-  </button>
-
   <div>
     <h2>{{ isEdit ? 'Editar Usuário' : 'Cadastrar Usuário' }}</h2>
     <p>Preencha os dados abaixo para cadastrar um novo usuário.</p>
   </div>
-
 </div>
 
 <form [formGroup]="form" (ngSubmit)="salvar()" class="card">
 
-  <!-- 🔥 PARTE SUPERIOR -->
-  <div class="grid-top">
+  <!-- GRID PRINCIPAL -->
+  <div class="grid">
 
-    <div class="input-icon">
-      <span class="icon">👤</span>
-      <input
-        type="text"
-        formControlName="nome"
-        placeholder="Digite o nome"
-      />
+    <!-- NOME -->
+    <div class="field">
+      <label>Nome</label>
+      <div class="input-icon">
+        <mat-icon>person</mat-icon>
+        <input type="text" formControlName="nome" placeholder="Digite o nome" />
+      </div>
+      <span class="error" *ngIf="form.get('nome')?.touched && form.get('nome')?.errors">
+
+        <span *ngIf="form.get('nome')?.errors?.['required']">
+          O nome é obrigatório
+        </span>
+
+        <span *ngIf="form.get('nome')?.errors?.['maxlength']">
+          Máximo de 60 caracteres
+        </span>
+
+      </span>
     </div>
 
-    <div class="input-icon">
-      <span class="icon">✉️</span>
-      <input
-        type="email"
-        formControlName="email"
-        placeholder="Digite o e-mail"
-      />
+    <!-- EMAIL -->
+    <div class="field">
+      <label>E-mail</label>
+      <div class="input-icon">
+        <mat-icon>mail</mat-icon>
+        <input type="email" formControlName="email" placeholder="Digite o e-mail" />
+      </div>
+      <span class="error" *ngIf="form.get('email')?.touched && form.get('email')?.errors">
+        <span *ngIf="form.get('email')?.errors?.['required']">
+          O e-mail é obrigatório
+        </span>
+
+        <span *ngIf="form.get('email')?.errors?.['email']">
+          Digite um e-mail válido
+        </span>
+      </span>
     </div>
 
-    <div class="input-icon">
-      <span class="icon">💼</span>
-      <select formControlName="roleId">
-       <option [ngValue]="0">Selecione o cargo</option>
-        <option *ngFor="let role of roles" [ngValue]="role.id">
-          {{ role.nome }}
-        </option>
-      </select>
+    <!-- CARGO -->
+    <div class="field">
+      <label>Cargo</label>
+      <div class="input-icon">
+        <mat-icon>work</mat-icon>
+        <select formControlName="roleId">
+          <option [ngValue]="0">Selecione o cargo</option>
+          <option *ngFor="let role of roles" [ngValue]="role.id">
+            {{ role.nome }}
+          </option>
+        </select>
+      </div>
+      <span class="error" *ngIf="form.get('roleId')?.touched && form.get('roleId')?.invalid">
+        Selecione um cargo
+      </span>
     </div>
 
   </div>
 
-  <!-- 🔥 DIVISOR -->
+  <!-- DIVISOR -->
   <div class="divider" *ngIf="!isEdit"></div>
 
-  <!-- 🔥 PARTE INFERIOR -->
-  <div class="grid-bottom" *ngIf="!isEdit">
+  <!-- SENHAS -->
+  <div class="grid two" *ngIf="!isEdit">
 
-    <div class="input-icon">
-      <span class="icon">🔒</span>
-      <input
-        type="password"
-        formControlName="senha"
-        placeholder="Digite a senha"
-      />
+    <div class="field">
+      <label>Senha</label>
+      <div class="input-icon">
+        <mat-icon>lock</mat-icon>
+        <input type="password" formControlName="senha" placeholder="Digite a senha" />
+      </div>
+
+      <span class="error" *ngIf="form.get('senha')?.touched && form.get('senha')?.errors">
+        A senha é obrigatória
+      </span>
     </div>
 
-    <div class="input-icon">
-      <span class="icon">🔐</span>
-      <input
-        type="password"
-        formControlName="confirmarSenha"
-        placeholder="Confirmar senha"
-      />
+    <div class="field">
+      <label>Confirmar senha</label>
+      <div class="input-icon">
+        <mat-icon>lock</mat-icon>
+        <input type="password" formControlName="confirmarSenha" placeholder="Confirme a senha" />
+      </div>
+
+      <span class="error" *ngIf="form.get('confirmarSenha')?.touched && form.get('confirmarSenha')?.errors">
+
+        <span *ngIf="form.get('confirmarSenha')?.errors?.['required']">
+          Confirmação obrigatória
+        </span>
+
+        <span *ngIf="form.get('confirmarSenha')?.errors?.['mismatch']">
+          As senhas não coincidem
+        </span>
+
+      </span>
     </div>
 
   </div>
 
-  <!-- 🔥 SWITCH ATIVO (EDIT MODE) -->
+  <!-- ATIVO -->
   <div class="switch" *ngIf="isEdit">
     <label>
       <input type="checkbox" formControlName="ativo" />
@@ -80,11 +115,18 @@
     </label>
   </div>
 
-  <!-- 🔥 AÇÕES -->
+  <!-- AÇÕES -->
   <div class="actions">
+
+    <button class="btn-back" type="button" (click)="voltar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+
     <button type="button" class="btn-cancel" (click)="voltar()">
       Cancelar
     </button>
+
     <button type="submit" class="btn-save">
       Salvar
     </button>

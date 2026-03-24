@@ -1,42 +1,56 @@
-<div class="page-header">
+<div class="page-container">
 
-  <div class="title-wrapper">
-    <button mat-icon-button class="btn-back" (click)="voltar()">
-      <mat-icon>arrow_back</mat-icon>
-    </button>
-
-    <div>
-      <h2>{{ id ? 'Editar Área' : 'Cadastrar Área' }}</h2>
-      <p>Preencha as informações abaixo.</p>
-    </div>
+  <!-- HEADER -->
+  <div class="page-header">
+    <h2>{{ id ? 'Editar Área' : 'Cadastrar Área' }}</h2>
+    <p>Preencha as informações abaixo.</p>
   </div>
 
-</div>
+  <!-- FORM -->
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="form-card">
 
-<div class="form-card">
-
-  <form [formGroup]="form">
-
+    <!-- CONTEÚDO -->
     <div class="form-content">
 
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Descrição</mat-label>
-        <input matInput formControlName="descricao" placeholder="Digite a descrição da área">
-      </mat-form-field>
+      <!-- DESCRIÇÃO -->
+      <div class="field">
+        <label>Descrição</label>
 
-      <mat-slide-toggle formControlName="ativo">
-        Ativo
-      </mat-slide-toggle>
+        <input
+          type="text"
+          formControlName="descricao"
+          placeholder="Digite a descrição da área"
+        />
+
+        <!-- VALIDAÇÃO -->
+        <span class="error"
+          *ngIf="form.get('descricao')?.touched && form.get('descricao')?.invalid">
+          A descrição é obrigatória
+        </span>
+      </div>
+
+      <!-- ATIVO -->
+      <div class="ativo">
+        <mat-slide-toggle formControlName="ativo">
+          Ativo
+        </mat-slide-toggle>
+      </div>
 
     </div>
 
+    <!-- AÇÕES -->
     <div class="actions">
 
-      <button mat-stroked-button (click)="voltar()">
+      <button type="button" class="btn-back" (click)="voltar()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+
+      <button type="button" class="btn-cancel" (click)="voltar()">
         Cancelar
       </button>
 
-      <button mat-raised-button class="btn-salvar" (click)="salvar()">
+      <button type="submit" class="btn-save">
         Salvar
       </button>
 
