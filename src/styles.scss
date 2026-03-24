@@ -62,3 +62,40 @@ body {
   flex: 1;
   overflow-y: auto;
 }
+
+/*Notificações*/
+
+/* SUCCESS */
+.snackbar-success {
+  background: linear-gradient(135deg, #22c55e, #16a34a) !important;
+  color: #16a34a !important;
+  border-radius: 10px !important;
+  font-weight: 500;
+}
+
+/* ERROR */
+.snackbar-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  color: red !important;
+  border-radius: 10px !important;
+}
+
+/* INFO */
+.snackbar-info {
+  background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+  color: yellow !important;
+}
+
+/* WARNING */
+.snackbar-warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: orangered !important;
+}
+
+/* SHADOW PREMIUM */
+.snackbar-success,
+.snackbar-error,
+.snackbar-info,
+.snackbar-warning {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}

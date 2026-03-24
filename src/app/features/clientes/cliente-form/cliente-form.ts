@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from '../../../core/services/cliente.service';
+import { NotificationService } from '../../../core/services/notifications/notification.service';
 
 @Component({
   selector: 'app-cliente-form',
@@ -22,6 +23,7 @@ import { ClienteService } from '../../../core/services/cliente.service';
 export class ClienteFormComponent implements OnInit {
   form!: FormGroup;
   id?: number;
+  private notify = inject(NotificationService);
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +36,7 @@ export class ClienteFormComponent implements OnInit {
       ativo: [true]
     });
   }
+
 
   ngOnInit() {
     const paramId = this.route.snapshot.paramMap.get('id');
@@ -57,16 +60,34 @@ export class ClienteFormComponent implements OnInit {
   }
 
   salvar() {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.notify.error('Nome do cliente é obrigatório!');
+      return;
+    }
 
     const nome = this.form.value.nome!;
 
     if (this.id) {
-      this.service.update(this.id, nome)
-        .subscribe(() => this.router.navigate(['/clientes']));
+      this.service.update(this.id, nome).subscribe({
+        next: () => {
+          this.notify.success('Cliente atualizado com sucesso!');
+          this.router.navigate(['/clientes']);
+        },
+        error: () => {
+          this.notify.error('Erro ao atualizar cliente!');
+        }
+      });
     } else {
-      this.service.create(nome)
-        .subscribe(() => this.router.navigate(['/clientes']));
+      this.service.create(nome).subscribe({
+        next: () => {
+          this.notify.success('Cliente cadastrado com sucesso!');
+          this.router.navigate(['/clientes']);
+        },
+        error: () => {
+          this.notify.error('Erro ao cadastrar cliente!');
+        }
+      });
     }
   }
 }
