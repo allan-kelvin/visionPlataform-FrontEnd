@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { UserService } from '../../../../core/services/user.service';
 import { VersionService } from '../../../../core/services/versions/version.service';
@@ -9,7 +10,7 @@ import { ConfirmDialogComponent } from '../../../../shared/confirm-dialog/confir
 
 @Component({
   selector: 'app-version-list',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatIconModule],
   templateUrl: './version-list.html',
   styleUrl: './version-list.scss',
 })
@@ -24,7 +25,7 @@ export class VersionListComponent implements OnInit {
   private dialog = inject(MatDialog);
 
   versions: any[] = [];
-  filtered: any[] = [];
+
 
   users: any[] = [];
   userMap: any = {};
@@ -32,6 +33,9 @@ export class VersionListComponent implements OnInit {
   search = '';
   status = '';
   creator = '';
+
+  Math = Math;
+  filtered: any[] = [];
 
   page = 1;
   pageSize = 5;
@@ -47,26 +51,20 @@ export class VersionListComponent implements OnInit {
   }
 
   loadUsers() {
-
     this.userService.getAll().subscribe(res => {
-
       this.users = res;
-
       res.forEach(u => {
         this.userMap[u.id] = u.nome;
       });
-
     });
-
   }
 
   loadVersions() {
 
     this.versionService.getAll().subscribe(res => {
-
+      console.log('VERSIONS =>', res);
       this.versions = res;
       this.filtered = res;
-
     });
 
   }
@@ -89,7 +87,7 @@ export class VersionListComponent implements OnInit {
 
       const creatorMatch =
         !this.creator ||
-        v.criadoPor === Number(this.creator);
+        v.criadorId === Number(this.creator);
 
       return searchMatch && statusMatch && creatorMatch;
 

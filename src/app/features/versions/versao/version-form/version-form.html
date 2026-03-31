@@ -13,9 +13,14 @@
 
     <div class="form-grid">
 
+      <!-- Número da Versão -->
       <div class="field">
         <label>Número da Versão</label>
         <input formControlName="numeroVersao">
+
+        <span class="error" *ngIf="form.get('numeroVersao')?.touched && form.get('numeroVersao')?.invalid">
+          Campo obrigatório
+        </span>
       </div>
 
       <div class="field">
@@ -29,14 +34,25 @@
 
       </div>
 
+      <!-- Data Limite -->
       <div class="field">
         <label>Data Limite de Tarefas</label>
         <input type="date" formControlName="dataLimiteTarefas">
+
+        <span class="error" *ngIf="form.get('dataLimiteTarefas')?.touched && form.get('dataLimiteTarefas')?.invalid">
+          Campo obrigatório
+        </span>
       </div>
 
+      <!-- Data Liberação -->
       <div class="field">
         <label>Data Prevista de Liberação</label>
         <input type="date" formControlName="dataPrevistaLiberacao">
+
+        <span class="error"
+          *ngIf="form.get('dataPrevistaLiberacao')?.touched && form.get('dataPrevistaLiberacao')?.invalid">
+          Campo obrigatório
+        </span>
       </div>
 
       <div class="field full">
@@ -47,6 +63,12 @@
     </div>
 
     <div class="actions">
+
+      <button class="btn-back" type="button" (click)="voltar()">
+        <mat-icon>arrow_back</mat-icon>
+        Voltar
+      </button>
+
 
       <button type="button" class="btn-cancel" (click)="cancelar()">
 
