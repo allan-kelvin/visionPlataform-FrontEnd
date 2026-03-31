@@ -266,3 +266,59 @@ tr:nth-child(even) td {
   background: rgba(0, 200, 83, 0.15) !important;
   box-shadow: inset 3px 0 0 #00c853;
 }
+
+.pagination {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TEXTO */
+.pagination-info {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* CONTROLES */
+.pagination-controls {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* BOTÃO PADRÃO */
+.page-btn,
+.page-number-btn {
+  width: 32px;
+  height: 32px;
+
+  border-radius: 8px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+/* HOVER */
+.page-btn:hover,
+.page-number-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ATIVO */
+.page-number-btn.active {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
+  font-weight: 600;
+}
+
+/* DESABILITADO */
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

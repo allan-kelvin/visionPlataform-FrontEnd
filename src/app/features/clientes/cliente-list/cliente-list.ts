@@ -31,7 +31,12 @@ export class ClienteListComponent implements OnInit {
   sortField: keyof Cliente = 'id';
   sortDirection: 'asc' | 'desc' = 'asc';
 
+  page = 1;
+  pageSize = 5;
+  filtered: any[] = [];
   filtroForm!: FormGroup;
+
+  Math = Math;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
