@@ -36,19 +36,17 @@ export class VersionFormComponent {
 
   ngOnInit() {
 
-    const id = this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
-
-      this.service.getById(Number(id))
-        .subscribe(v => {
-
-          this.form.patchValue(v);
-
-        });
-
+    if (idParam && idParam !== 'new') {
+      const id = Number(idParam);
+      if (!isNaN(id)) {
+        this.service.getById(id)
+          .subscribe(v => {
+            this.form.patchValue(v);
+          });
+      }
     }
-
   }
 
   salvar() {
@@ -62,19 +60,28 @@ export class VersionFormComponent {
 
     const payload = this.form.getRawValue();
 
-    const id = this.route.snapshot.paramMap.get('id');
+    const idParam = this.route.snapshot.paramMap.get('id');
 
-    if (id) {
-      this.service.update(Number(id), payload).subscribe({
-        next: () => {
-          this.notify.success('Versão atualizada com sucesso!');
-          this.router.navigate(['/versions']);
-        },
-        error: () => {
-          this.notify.error('Erro ao atualizar versão!');
-        }
-      });
+    if (idParam && idParam !== 'new') {
+
+      const id = Number(idParam);
+
+      if (!isNaN(id)) {
+
+        this.service.update(id, payload).subscribe({
+          next: () => {
+            this.notify.success('Versão atualizada com sucesso!');
+            this.router.navigate(['/versions']);
+          },
+          error: () => {
+            this.notify.error('Erro ao atualizar versão!');
+          }
+        });
+
+      }
+
     } else {
+
       this.service.create(payload).subscribe({
         next: () => {
           this.notify.success('Versão cadastrada com sucesso!');
@@ -84,6 +91,7 @@ export class VersionFormComponent {
           this.notify.error('Erro ao cadastrar versão!');
         }
       });
+
     }
 
   }

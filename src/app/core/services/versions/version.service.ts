@@ -21,7 +21,9 @@ export class VersionService {
   }
 
   create(data: any): Observable<number> {
+    console.log(data)
     return this.http.post<number>(this.api, data);
+
   }
 
   update(id: number, data: any): Observable<any> {
@@ -35,5 +37,9 @@ export class VersionService {
       `${this.api}/${id}`
     );
 
+  }
+
+  release(id: number) {
+    return this.http.post(`${this.api}/${id}/release`, {});
   }
 }

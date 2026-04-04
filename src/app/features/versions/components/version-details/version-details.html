@@ -1,1 +1,62 @@
-<p>version-details works!</p>
+
+<div class="version-details" *ngIf="version">
+
+  <div class="details-header">
+
+    <h2>{{ version.numeroVersao }}</h2>
+
+    <span class="status" [ngClass]="{
+        planejamento: version.statusVersao === 'Planejamento',
+        testes: version.statusVersao === 'EmTestes',
+        liberada: version.statusVersao === 'Liberada'
+      }">
+
+      {{ version.statusVersao }}
+
+    </span>
+
+  </div>
+
+
+  <div class="details-grid">
+
+    <div>
+      <label>Limite Tarefas</label>
+      <span>
+        {{ version.dataLimiteTarefas | date:'yyyy-MM-dd' }}
+      </span>
+    </div>
+
+    <div>
+      <label>Previsão Liberação</label>
+      <span>
+        {{ version.dataPrevistaLiberacao | date:'yyyy-MM-dd' }}
+      </span>
+    </div>
+
+    <div>
+      <label>Liberação Real</label>
+      <span>
+        {{
+        version.dataLiberacaoReal
+        ? (version.dataLiberacaoReal | date:'yyyy-MM-dd')
+        : '—'
+        }}
+      </span>
+    </div>
+
+    <div>
+      <label>Criado por</label>
+      <span>—</span>
+    </div>
+
+  </div>
+
+  <div class="details-description">
+
+    {{ version.observacoes }}
+
+  </div>
+
+</div>
+

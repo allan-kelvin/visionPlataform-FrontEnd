@@ -112,7 +112,7 @@ table {
   table-layout: fixed;
 }
 
-/* 🔥 EVITA BUG DE SOBREPOSIÇÃO */
+/* EVITA BUG DE SOBREPOSIÇÃO */
 .table-card {
   overflow: visible;
 }
@@ -164,8 +164,6 @@ td:nth-child(4) {
   width: 180px;
 }
 
-/* 🔥 BOTÕES COM HOVER TOP */
-/* BOTÕES */
 .btn-edit,
 .btn-delete {
   display: flex;
@@ -206,12 +204,11 @@ td:nth-child(4) {
   }
 }
 
-/* 🔥 GARANTE TAMANHO IGUAL AOS INPUTS */
 .select-group ng-select {
   width: 100%;
 }
 
-/* 🔥 CONTAINER PRINCIPAL */
+/*CONTAINER PRINCIPAL */
 ::ng-deep .ng-select.custom-select {
   height: 42px;
   border-radius: 10px;
@@ -222,7 +219,6 @@ td:nth-child(4) {
   padding: 0 10px;
 }
 
-/* 🔥 REMOVE FUNDO BUGADO */
 ::ng-deep .ng-select.custom-select {
   height: 42px;
   border-radius: 10px;
