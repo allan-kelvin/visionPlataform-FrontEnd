@@ -36,7 +36,7 @@
       </select>
     </div>
 
-    <!-- 🔥 BOTÕES -->
+    <!-- BOTÕES -->
     <div class="actions-filter">
       <button (click)="filtrar()" class="btn-filter">
         Filtrar
@@ -52,10 +52,18 @@
 
   <!-- TABELA -->
   <div class="table-card">
+    <div class="table-actions" *ngIf="selectedIds.length > 0">
+
+  <button class="btn-liberar" (click)="liberarVersao()">
+    Liberar
+  </button>
+
+</div>
     <table class="table">
 
       <thead>
         <tr>
+          <th style="width: 40px;"></th>
           <th (click)="ordenar('id')">ID</th>
           <th (click)="ordenar('numeroVersao')">Versão</th>
           <th>Status</th>
@@ -69,6 +77,17 @@
 
       <tbody>
         <tr *ngFor="let v of paginated">
+
+
+            <label class="checkbox">
+              <input
+                type="checkbox"
+                [checked]="selectedIds.includes(v.id)"
+                (change)="toggleSelection(v.id)"
+                [disabled]="v.statusVersao === 'Liberada'"
+              >
+              <span> </span>
+            </label>
 
           <td>{{ v.id }}</td>
           <td>{{ v.numeroVersao }}</td>
@@ -109,40 +128,33 @@
   </div>
 
   <!-- PAGINAÇÃO -->
- <div class="pagination">
+  <div class="pagination">
 
-  <div class="pagination-info">
-    Mostrando {{ (page - 1) * pageSize + 1 }} -
-    {{ Math.min(page * pageSize, filtered.length) }}
-    de {{ filtered.length }}
-  </div>
+    <div class="pagination-info">
+      Mostrando {{ (page - 1) * pageSize + 1 }} -
+      {{ Math.min(page * pageSize, filtered.length) }}
+      de {{ filtered.length }}
+    </div>
 
-  <div class="pagination-controls">
+    <div class="pagination-controls">
 
-    <button class="page-btn"
-      (click)="page = page - 1"
-      [disabled]="page === 1">
-      ‹
-    </button>
+      <button class="page-btn" (click)="page = page - 1" [disabled]="page === 1">
+        ‹
+      </button>
 
-    <button
-      *ngFor="let p of [].constructor(Math.ceil(filtered.length / pageSize)); let i = index"
-      class="page-number-btn"
-      [class.active]="page === i + 1"
-      (click)="page = i + 1">
+      <button *ngFor="let p of [].constructor(Math.ceil(filtered.length / pageSize)); let i = index"
+        class="page-number-btn" [class.active]="page === i + 1" (click)="page = i + 1">
 
-      {{ i + 1 }}
+        {{ i + 1 }}
 
-    </button>
+      </button>
 
-    <button class="page-btn"
-      (click)="page = page + 1"
-      [disabled]="page * pageSize >= filtered.length">
-      ›
-    </button>
+      <button class="page-btn" (click)="page = page + 1" [disabled]="page * pageSize >= filtered.length">
+        ›
+      </button>
+
+    </div>
 
   </div>
-
-</div>
 
 </div>

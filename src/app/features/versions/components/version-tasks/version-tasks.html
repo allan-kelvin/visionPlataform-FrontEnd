@@ -1,1 +1,64 @@
-<p>version-tasks works!</p>
+<div class="tasks-section">
+
+  <div class="tasks-header">
+    <h3>Tarefas ({{ tasks.length }})</h3>
+
+    <button class="btn-add-task" (click)="addTask.emit()">
+      + Adicionar Tarefa
+    </button>
+  </div>
+
+  <table class="tasks-table">
+
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Azure</th>
+        <th>Título</th>
+        <th>Tipo</th>
+        <th>Status</th>
+        <th>QA</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr *ngFor="let t of tasks; let i = index">
+
+        <td>{{ i + 1 }}</td>
+
+        <td>
+          <a [href]="t.azureTaskUrl" target="_blank">
+            {{ t.azureTaskId }}
+          </a>
+        </td>
+
+        <td>{{ t.titulo }}</td>
+
+        <td>{{ getTipo(t.tipo) }}</td>
+
+        <td>{{ t.statusPlanejamento }}</td>
+
+        <td>{{ t.qa || '-' }}</td>
+
+        <td class="actions">
+          <button class="btn-icon edit" (click)="onEdit(t)" [disabled]="version.statusVersao === 'Liberada'"
+            matTooltip="Versão liberada não pode ser alterada">
+
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button class="btn-icon delete" (click)="onDelete(t)" [disabled]="version.statusVersao === 'Liberada'"
+          matTooltip="Versão Liberada não pode ser excluida">
+
+            <mat-icon>delete</mat-icon>
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

@@ -36,6 +36,7 @@ export class VersionListComponent implements OnInit {
 
   Math = Math;
   filtered: any[] = [];
+  selectedIds: number[] = [];
 
   page = 1;
   pageSize = 5;
@@ -62,7 +63,6 @@ export class VersionListComponent implements OnInit {
   loadVersions() {
 
     this.versionService.getAll().subscribe(res => {
-      console.log('VERSIONS =>', res);
       this.versions = res;
       this.filtered = res;
     });
@@ -176,6 +176,35 @@ export class VersionListComponent implements OnInit {
       }
 
     });
+
+  }
+
+  toggleSelection(id: number) {
+
+    if (this.selectedIds.includes(id)) {
+      this.selectedIds = this.selectedIds.filter(x => x !== id);
+    } else {
+      this.selectedIds.push(id);
+    }
+  }
+
+  liberarVersao() {
+
+    if (this.selectedIds.length !== 1) {
+      alert('Selecione apenas uma versão para liberar');
+      return;
+    }
+
+    const versionId = this.selectedIds[0];
+
+    this.versionService.release(versionId)
+      .subscribe(() => {
+
+        this.selectedIds = [];
+
+        this.loadVersions();
+
+      });
 
   }
 }

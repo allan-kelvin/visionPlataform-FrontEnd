@@ -6,12 +6,18 @@ import { VersionTask } from '../../../core/models/version-task.model';
 import { Version } from '../../../core/models/version.model';
 import { VersionTaskService } from '../../../core/services/versions/version-task.service';
 import { VersionService } from '../../../core/services/versions/version.service';
+import { ConfirmDialogComponent } from '../../../shared/confirm-dialog/confirm-dialog';
 import { TaskModalComponent } from '../components/task-modal/task-modal';
+import { VersionDetailsComponent } from '../components/version-details/version-details';
+import { VersionTasksComponent } from '../components/version-tasks/version-tasks';
 import { UserService } from './../../../core/services/user.service';
 
 @Component({
   selector: 'app-version-page',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule,
+    FormsModule,
+    VersionDetailsComponent,
+    VersionTasksComponent],
   templateUrl: './version-page.html',
   styleUrl: './version-page.scss',
 })
@@ -63,16 +69,6 @@ export class VersionPageComponent implements OnInit {
 
   }
 
-  getQaNome(id: number | null) {
-
-    if (!id) return '-';
-
-    const user = this.usuarios.find(u => u.id === id);
-
-    return user ? user.nome : 'usuarioQA';
-
-  }
-
   // ===============================
   // INIT
   // ===============================
@@ -91,9 +87,20 @@ export class VersionPageComponent implements OnInit {
 
     this.userService.getAll().subscribe(res => {
       this.usuarios = res;
+      this.tasks = [...this.tasks];
     });
 
   }
+
+  getQaNome(id: number | null) {
+    if (!id) return '-';
+
+    const user = this.usuarios.find(u => Number(u.id) === Number(id));
+
+    return user ? user.nome : '-';
+  }
+
+
 
   // ===============================
   // LOAD VERSIONS
@@ -209,7 +216,6 @@ export class VersionPageComponent implements OnInit {
       this.tasks = tasks;
 
       this.calcularProgresso(version, tasks);
-
     });
 
   }
@@ -244,6 +250,54 @@ export class VersionPageComponent implements OnInit {
       if (result) {
         this.carregarTarefas();
       }
+    });
+  }
+
+  //Editar || Excluir
+
+  editarTask(task: any) {
+
+    const dialogRef = this.dialog.open(TaskModalComponent, {
+      width: '720px',
+      data: {
+        versionId: this.selectedVersion?.id,
+        version: this.selectedVersion?.numeroVersao,
+        task: task // 🔥 AQUI É O SEGREDO
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.carregarTarefas();
+      }
+    });
+
+  }
+  excluirTask(task: any) {
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      panelClass: 'dialog-dark',
+      data:
+      {
+        title: 'Excluir tarefa',
+        message: 'Deseja Realmente Excluir essa tarefa',
+        confirmText: 'Excluir',
+        cancelText: 'Cancelar'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+
+      if (result) {
+
+        this.taskService.delete(task.id)
+          .subscribe(() => {
+            this.carregarTarefas();
+          });
+
+      }
+
     });
   }
 }
