@@ -1,7 +1,10 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { routes } from './app.routes';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { errorInterceptor } from './core/interceptors/error-interceptor';
@@ -17,6 +20,13 @@ export const appConfig: ApplicationConfig = {
         errorInterceptor
       ])
     ),
-    provideAnimations()
+    importProvidersFrom(
+      CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory
+      })
+    ),
+    provideAnimations(),
+    provideCharts(withDefaultRegisterables())
   ]
 };

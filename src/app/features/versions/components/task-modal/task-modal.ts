@@ -127,8 +127,6 @@ export class TaskModalComponent implements OnInit {
 
     };
 
-    console.log("Payload enviado:", payload);
-
     this.taskService.create(payload).subscribe({
 
       next: () => {
