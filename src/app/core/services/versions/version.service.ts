@@ -21,9 +21,7 @@ export class VersionService {
   }
 
   create(data: any): Observable<number> {
-    console.log(data)
     return this.http.post<number>(this.api, data);
-
   }
 
   update(id: number, data: any): Observable<any> {

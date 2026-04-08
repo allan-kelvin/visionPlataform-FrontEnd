@@ -1,1 +1,138 @@
-<p>dashboard</p>
+<div class="dashboard">
+
+  <!-- LOADING -->
+  <div *ngIf="!data; else dashboardContent" class="loading">
+    Carregando dashboard...
+  </div>
+
+  <!-- CONTEÚDO -->
+  <ng-template #dashboardContent>
+
+    <ng-container *ngIf="data as d">
+
+      <!-- HEADER -->
+      <div class="header">
+        <div>
+          <h2>Dashboard</h2>
+          <p>Visão geral das versões</p>
+        </div>
+
+        <div class="filters">
+          <button [class.active]="selectedPeriod === 7" (click)="setPeriod(7)">7 dias</button>
+          <button [class.active]="selectedPeriod === 30" (click)="setPeriod(30)">30 dias</button>
+          <button [class.active]="selectedPeriod === 90" (click)="setPeriod(90)">90 dias</button>
+        </div>
+      </div>
+
+      <!-- TOP CARDS -->
+      <div class="top-cards">
+
+        <div class="card big">
+          <span>Versões Geradas</span>
+          <h1>{{ d.summary.totalVersions }}</h1>
+        </div>
+
+        <div class="card highlight">
+          <span>Planejamento</span>
+          <h2>{{ d.summary.emPlanejamento }}</h2>
+        </div>
+
+        <div class="card highlight">
+          <span>Em Testes</span>
+          <h2>{{ d.summary.emTestes }}</h2>
+        </div>
+
+        <div class="card highlight">
+          <span>Liberadas</span>
+          <h2>{{ d.summary.liberadas }}</h2>
+        </div>
+
+        <!-- Saúde -->
+        <div class="card highlight">
+          <span>Saúde do Sistema</span>
+          <h2>{{ getSaude() }}</h2>
+        </div>
+
+      </div>
+
+      <!-- MAIN -->
+      <div class="main">
+
+        <!-- CHART -->
+        <div class="chart-card">
+          <h3>Tarefas por Versão</h3>
+
+          <canvas *ngIf="chartData" baseChart [data]="chartData" [options]="chartOptions" [type]="'line'">
+          </canvas>
+
+          <p *ngIf="!chartData">Carregando gráfico...</p>
+        </div>
+
+        <!-- CALENDÁRIO -->
+        <div class="calendar-card">
+          <h3>📅 Calendário</h3>
+
+          <mwl-calendar-month-view [viewDate]="viewDate" [events]="events">
+          </mwl-calendar-month-view>
+        </div>
+
+        <!-- SIDE -->
+        <div class="side">
+
+          <div class="side-card">
+            <span>Confirmadas</span>
+            <h2>{{ totalConfirmadas }}</h2>
+          </div>
+
+          <div class="side-card">
+            <span>Desejáveis</span>
+            <h2>{{ totalDesejaveis }}</h2>
+          </div>
+
+          <div class="side-card">
+            <span>Sem QA</span>
+            <h2>{{ totalSemQa }}</h2>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- VERSION CARDS -->
+      <div class="versions">
+
+        <div class="version-card" *ngFor="let v of d.versions" [class.risk-high]="v.indicadorRisco === 'Vermelho'">
+
+          <div class="header">
+            <h3>{{ v.numeroVersao }}</h3>
+            <span class="status">{{ v.status }}</span>
+          </div>
+
+          <div class="progress">
+            <div class="bar confirmadas" [style.width.%]="v.percentualConfirmadas">
+            </div>
+          </div>
+
+          <div class="info">
+            <span>✔ {{ v.confirmadas }}</span>
+            <span>⚠ {{ v.desejaveis }}</span>
+            <span>❌ {{ v.semQA }}</span>
+          </div>
+
+          <div class="risk" [ngClass]="getRiskClass(v.indicadorRisco)">
+            {{ v.indicadorRisco }}
+          </div>
+
+          <div *ngFor="let alerta of getAlertas()" class="alert">
+            ⚠ Versão {{ alerta.numeroVersao }} com risco alto
+          </div>
+
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </ng-template>
+
+</div>

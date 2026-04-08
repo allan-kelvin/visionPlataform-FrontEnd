@@ -198,12 +198,25 @@ export class VersionListComponent implements OnInit {
     const versionId = this.selectedIds[0];
 
     this.versionService.release(versionId)
-      .subscribe(() => {
+      .subscribe({
+        next: () => {
 
-        this.selectedIds = [];
+          this.selectedIds = [];
+          this.loadVersions();
 
-        this.loadVersions();
+        },
+        error: (err) => {
 
+          this.dialog.open(ConfirmDialogComponent, {
+            width: '400px',
+            panelClass: 'dialog-dark',
+            data: {
+              title: 'Não foi possível liberar',
+              message: 'As tarefas dessa versão não estão confirmadas'
+            }
+          });
+
+        }
       });
 
   }
