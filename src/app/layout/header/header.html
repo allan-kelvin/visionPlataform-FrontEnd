@@ -41,30 +41,42 @@
         {{ userInitial }}
       </div>
 
-      <span class="user-name">
-        {{ userName }}
-      </span>
+      <div class="user-info">
+        <span class="user-name">{{ userName }}</span>
+        <span class="user-role">Administrador</span>
+      </div>
 
-      <mat-icon>expand_more</mat-icon>
+      <mat-icon class="arrow">expand_more</mat-icon>
 
     </button>
 
     <!-- MENU -->
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" class="custom-menu">
 
-      <button mat-menu-item (click)="goToProfile()">
-        <mat-icon>person</mat-icon>
-        Meu perfil
-      </button>
+  <!-- HEADER -->
+  <div class="menu-header" (click)="$event.stopPropagation()">
+    <div class="avatar small">{{ userInitial }}</div>
 
-      <mat-divider></mat-divider>
+    <div class="menu-user-info">
+      <div class="menu-name">{{ userName || 'Usuário' }}</div>
+      <div class="menu-email">{{ userEmail || 'email@email.com' }}</div>
+    </div>
+  </div>
 
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        Sair
-      </button>
+  <mat-divider></mat-divider>
 
-    </mat-menu>
+  <!-- ITENS -->
+  <button mat-menu-item (click)="goToProfile()">
+    <mat-icon>person</mat-icon>
+    Meu perfil
+  </button>
+
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Sair
+  </button>
+
+</mat-menu>
 
   </div>
 

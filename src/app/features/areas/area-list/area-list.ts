@@ -30,6 +30,12 @@ export class AreaListComponent implements OnInit {
 
   displayedColumns = ['id', 'descricao', 'acoes'];
   dataSource = new MatTableDataSource<Area>();
+  pageSize = 5;
+  pageIndex = 0;
+  totalPages = 0;
+  pages: number[] = [];
+
+  data: Area[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -47,11 +53,16 @@ export class AreaListComponent implements OnInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource._updateChangeSubscription();
+
   }
 
   load() {
     this.service.getAll().subscribe(res => {
-      this.dataSource.data = res;
+      this.data = res;
+      this.totalPages = Math.ceil(this.data.length / this.pageSize);
+      this.pages = Array(this.totalPages).fill(0);
+      this.atualizarPagina();
     });
   }
 
@@ -70,5 +81,31 @@ export class AreaListComponent implements OnInit {
 
   excluir(id: number) {
     this.service.delete(id).subscribe(() => this.load());
+  }
+
+  atualizarPagina() {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+
+    this.dataSource.data = this.data.slice(start, end);
+  }
+
+  irParaPagina(index: number) {
+    this.pageIndex = index;
+    this.atualizarPagina();
+  }
+
+  proximaPagina() {
+    if (this.pageIndex < this.totalPages - 1) {
+      this.pageIndex++;
+      this.atualizarPagina();
+    }
+  }
+
+  paginaAnterior() {
+    if (this.pageIndex > 0) {
+      this.pageIndex--;
+      this.atualizarPagina();
+    }
   }
 }

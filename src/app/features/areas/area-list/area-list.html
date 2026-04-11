@@ -26,9 +26,9 @@
         Filtrar
       </button>
 
-       <button mat-raised-button class="btn-primary" (click)="novo()">
-          <mat-icon>add</mat-icon>
-            Nova Área
+      <button mat-raised-button class="btn-primary" (click)="novo()">
+        <mat-icon>add</mat-icon>
+        Nova Área
       </button>
     </div>
 
@@ -77,10 +77,21 @@
 
     </table>
 
-    <mat-paginator [pageSize]="5"
-                   [pageSizeOptions]="[5,10,20]">
-    </mat-paginator>
+    <!-- NOVO -->
+    <div class="custom-pagination">
 
+      <button (click)="paginaAnterior()" [disabled]="pageIndex === 0">
+        ‹
+      </button>
+
+      <button *ngFor="let page of pages; let i = index" [class.active]="pageIndex === i" (click)="irParaPagina(i)">
+        {{ i + 1 }}
+      </button>
+
+      <button (click)="proximaPagina()" [disabled]="pageIndex === totalPages - 1">
+        ›
+      </button>
+
+    </div>
   </div>
-
 </div>
