@@ -73,4 +73,34 @@ export class AuthService {
     return decoded.role;
   }
 
+  getUser(): { id: string | null; name: string; email: string } | null {
+
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const decoded: any = jwtDecode(token);
+
+      return {
+        id:
+          decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"] ||
+          decoded.sub ||
+          null,
+
+        name:
+          decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"] ||
+          '',
+
+        email:
+          decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"] ||
+          ''
+      };
+
+    } catch (error) {
+      console.error('Erro ao decodificar token', error);
+      return null;
+    }
+
+  }
+
 }

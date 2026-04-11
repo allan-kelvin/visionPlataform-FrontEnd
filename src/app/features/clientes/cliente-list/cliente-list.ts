@@ -26,6 +26,9 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
   styleUrl: './cliente-list.scss',
 })
 export class ClienteListComponent implements OnInit {
+
+  pages: number[] = [];
+  totalPages = 0;
   displayedColumns: string[] = ['id', 'nome', 'acoes'];
   dataSource = new MatTableDataSource<Cliente>();
   sortField: keyof Cliente = 'id';
@@ -57,23 +60,55 @@ export class ClienteListComponent implements OnInit {
 
   load() {
     this.service.getAll().subscribe((data) => {
-      this.dataSource.data = data;
-      this.dataSource.paginator = this.paginator;
+      this.filtered = data; // 👈 ESSENCIAL
+      this.atualizarPagina();
+      this.totalPages = Math.ceil(this.filtered.length / this.pageSize);
+      this.pages = Array(this.totalPages).fill(0);
     });
+  }
+
+  atualizarPagina() {
+    const start = (this.page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+
+    this.dataSource.data = this.filtered.slice(start, end);
+  }
+
+  irParaPagina(p: number) {
+    this.page = p;
+    this.atualizarPagina();
+  }
+
+  proximaPagina() {
+    if (this.page < this.totalPages) {
+      this.page++;
+      this.atualizarPagina();
+    }
+  }
+
+  paginaAnterior() {
+    if (this.page > 1) {
+      this.page--;
+      this.atualizarPagina();
+    }
   }
 
   filtrar() {
     const { id, nome } = this.filtroForm.value;
 
-    this.dataSource.filterPredicate = (data: Cliente, filter: string) => {
-      const search = JSON.parse(filter);
+    this.filtered = this.dataSource.data.filter((c: Cliente) => {
       return (
-        (!search.id || data.id.toString().includes(search.id)) &&
-        (!search.nome || data.nome.toLowerCase().includes(search.nome.toLowerCase()))
+        (!id || c.id.toString().includes(id)) &&
+        (!nome || c.nome.toLowerCase().includes(nome.toLowerCase()))
       );
-    };
+    });
 
-    this.dataSource.filter = JSON.stringify({ id, nome });
+    this.page = 1;
+
+    this.totalPages = Math.ceil(this.filtered.length / this.pageSize);
+    this.pages = Array(this.totalPages).fill(0);
+
+    this.atualizarPagina();
   }
 
   novo() {

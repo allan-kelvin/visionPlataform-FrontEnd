@@ -27,7 +27,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss", "src/angular-calendar.scss"]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {

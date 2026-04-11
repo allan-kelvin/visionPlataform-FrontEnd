@@ -19,6 +19,7 @@
   p {
     margin: 4px 0 0;
     color: #9ca3af;
+    font-size: 13px;
   }
 }
 
@@ -112,15 +113,15 @@
 
 /* TABELA */
 .table-card {
-  padding: 20px;
+  padding: 0;
   border-radius: 16px;
+  overflow: hidden;
 
   backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.3s ease;
 }
 
 table {
@@ -131,14 +132,20 @@ table {
 
 /* HEADER */
 th {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 12px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: #9ca3af;
+  padding: 14px 16px;
+  border: none;
 }
 
 /* LINHAS */
 td,
 th {
-  padding: 16px 8px;
+  padding: 18px 16px;
+  font-size: 14px;
+  border: none;
 }
 
 /* ZEBRA */
@@ -155,6 +162,26 @@ mat-row {
   }
 }
 
+/* LINHAS */
+::ng-deep .mat-mdc-row {
+  transition: all 0.2s ease;
+}
+
+/* ZEBRA SUAVE */
+::ng-deep .mat-mdc-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* HOVER BONITO */
+::ng-deep .mat-mdc-row:hover {
+  background: rgba(34, 197, 94, 0.08);
+}
+
+/* HEADER ROW */
+::ng-deep .mat-mdc-header-row {
+  background: transparent;
+}
+
 /* AÇÕES */
 .acoes-header,
 .acoes-cell {
@@ -163,6 +190,7 @@ mat-row {
 
 .acoes-wrapper {
   display: inline-flex;
+  justify-content: flex-end;
   gap: 10px;
 }
 
@@ -207,46 +235,38 @@ mat-row {
   }
 }
 
-/* PAGINADOR */
-::ng-deep .mat-paginator {
-  margin-top: 16px;
-  background: transparent;
+/* PAGINAÇÃO */
+.custom-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 20px;
+}
+
+.custom-pagination button {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
   color: #9ca3af;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
 }
 
-::ng-deep .mat-mdc-table {
-  background: transparent !important;
+.custom-pagination button:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-::ng-deep .mat-mdc-row:nth-child(even) {
-  background: rgba(255, 255, 255, 0.02);
+.custom-pagination button.active {
+  background: #22c55e;
+  color: black;
+  font-weight: bold;
 }
 
-::ng-deep .mat-mdc-row:nth-child(odd) {
-  background: transparent;
-}
-
-::ng-deep .mat-paginator-range-label {
-  color: #9ca3af;
-}
-
-::ng-deep .mat-icon-button {
-  color: #9ca3af;
-}
-
-::ng-deep .mat-mdc-row {
-  transition: all 0.2s ease;
-}
-
-::ng-deep .mat-mdc-row:hover {
-  background: rgba(34, 197, 94, 0.08);
-}
-
-::ng-deep .mat-mdc-paginator {
-  background: transparent;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  margin-top: 12px;
-  padding-top: 12px;
+.custom-pagination button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 @keyframes fadeIn {

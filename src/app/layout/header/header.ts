@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,14 +22,15 @@ import { Router } from '@angular/router';
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @Output() toggleSidebar = new EventEmitter<void>();
 
   search = '';
 
-  userName = 'Allan';
-  userInitial = 'A';
+  userName = '';
+  userEmail = '';
+  userInitial = 'V';
 
   constructor(
     private authService: AuthService,
@@ -44,6 +45,35 @@ export class HeaderComponent {
     { name: 'Planejamento de versões', path: '/planejamento' },
     { name: 'Versões', path: '/versions' }
   ];
+
+  ngOnInit() {
+
+    const user = this.authService.getUser();
+
+    console.log('User Token: ', user);
+
+    if (user) {
+      this.userName = user.name;
+      this.userEmail = user.email;
+      this.userInitial = user.name?.charAt(0).toUpperCase();
+    }
+  }
+
+  getUser() {
+    const token = localStorage.getItem('token');
+
+    if (!token) return null;
+
+    const payload = JSON.parse(atob(token.split('.')[1]));
+
+    return {
+      id: payload.sub,
+      name: payload.name,
+      email: payload.email
+    };
+  }
+
+
 
   searchPage() {
 
@@ -85,4 +115,6 @@ export class HeaderComponent {
   logout() {
     this.authService.logout();
   }
+
+
 }

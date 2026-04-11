@@ -1,3 +1,5 @@
+/* HEADER */
+
 .header {
   height: 80px;
   display: flex;
@@ -13,73 +15,211 @@
 .search-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 6px 14px;
-  border-radius: 20px;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 8px 16px;
+  border-radius: 25px;
   width: 340px;
+  transition: all 0.2s ease;
+
+  &:focus-within {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 2px rgba(94, 252, 141, 0.15);
+  }
+
+  mat-icon {
+    font-size: 20px;
+    opacity: 0.7;
+  }
+
+  input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+    font-size: 14px;
+  }
 }
 
-.search-wrapper input {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: white;
-  width: 100%;
-}
-
-/* lado direito */
+/* RIGHT SIDE */
 
 .header-right {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   padding-right: 10px;
 }
 
-/* notificações */
+/* NOTIFICATION */
 
 .icon-button {
   position: relative;
   color: white;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .badge {
   position: absolute;
-  top: 4px;
-  right: 4px;
+  top: 2px;
+  right: 2px;
   background: #5efc8d;
   color: black;
   font-size: 10px;
   border-radius: 50%;
-  padding: 2px 5px;
+  padding: 2px 6px;
+  font-weight: bold;
 }
 
-/* avatar */
+/* USER BUTTON */
 
 .avatar-button {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  transition: background 0.2s;
+  padding: 6px 14px;
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.03);
+  height: 75px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-1px);
+  }
 }
 
+/*Limpando o Avatar*/
+
+.avatar-button.mat-mdc-button {
+  --mdc-text-button-container-color: transparent;
+}
+
+.avatar-button .mat-mdc-button-persistent-ripple {
+  display: none !important;
+}
+
+.avatar-button .mat-mdc-button-ripple {
+  display: none !important;
+}
+
+.avatar-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* AVATAR */
+
 .avatar {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #5efc8d, #3ad47b);
+  background: linear-gradient(135deg, #5efc8d, #22c55e);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #020617;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* USER INFO */
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
 }
 
 .user-name {
   font-size: 14px;
-  opacity: 0.9;
+  font-weight: 600;
+  color: white;
+  max-width: 140px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-top: 2px;
+}
+
+/* ARROW */
+
+.arrow {
+  font-size: 20px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+/* MENU */
+
+::ng-deep .custom-menu {
+  background: #020617 !important;
+  border-radius: 14px !important;
+  padding: 6px !important;
+  min-width: 220px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* MENU HEADER */
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+.menu-user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menu-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.menu-email {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* SMALL AVATAR */
+
+.avatar.small {
+  width: 30px;
+  height: 32px;
+  font-size: 13px;
+}
+
+/* MENU ITEMS */
+
+::ng-deep .custom-menu .mat-mdc-menu-item {
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: all 0.2s ease;
+}
+
+::ng-deep .custom-menu .mat-mdc-menu-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(2px);
+}
+
+::ng-deep .custom-menu mat-icon {
+  color: #5efc8d;
 }
