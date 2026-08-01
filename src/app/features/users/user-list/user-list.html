@@ -36,6 +36,7 @@
       </button>
     </div>
   </div>
+
   <!--TABELA -->
   <div class="card table-card">
 
@@ -45,7 +46,7 @@
           <th>ID</th>
           <th>Nome</th>
           <th>Cargo</th>
-          <th class="actions-col">Ações</th>
+          <th class="actions-header"><span>Ações</span></th>
         </tr>
       </thead>
 
@@ -56,14 +57,16 @@
           <td>{{ user.role }}</td>
 
           <td class="actions-col">
-            <button class="btn-edit" (click)="editar(user.id)">
-             <mat-icon>edit</mat-icon>
-             Editar
-            </button>
-            <button class="btn-delete" (click)="excluir(user.id)">
-             <mat-icon>delete</mat-icon>
-             Excluir
-            </button>
+            <div class="actions-buttons">
+              <button class="btn-edit" (click)="editar(user.id)">
+                <mat-icon>edit</mat-icon>
+                Editar
+                </button>
+              <button class="btn-delete" (click)="excluir(user.id)">
+              <mat-icon>delete</mat-icon>
+                Excluir
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

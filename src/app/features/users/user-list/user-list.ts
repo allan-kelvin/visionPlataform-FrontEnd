@@ -23,12 +23,13 @@ export class UserListComponent implements OnInit {
   private router = inject(Router);
 
   users: any[] = [];
+  allUsers: any[] = [];
   roles: any[] = [];
 
   filtro = {
     id: '',
     nome: '',
-    roleId: 0
+    roleId: null
   };
 
   page = 1;
@@ -67,10 +68,11 @@ export class UserListComponent implements OnInit {
 
   loadUsers() {
     this.userService.getAll().subscribe({
-      next: (data) => {
-        this.users = data;
-      },
-      error: (err) => console.error(err)
+      next: data => {
+        console.log(data)
+        this.allUsers = data;
+        this.users = [...data];
+      }
     });
   }
 
@@ -84,23 +86,25 @@ export class UserListComponent implements OnInit {
   }
 
   filtrar() {
-    this.loadUsers();
 
-    this.users = this.users.filter(u => {
+    this.users = this.allUsers.filter(u => {
+
       const matchId =
-        this.filtro.id === '' ||
-        u.id.toString().includes(this.filtro.id);
+        !this.filtro.id ||
+        u.id.toString().includes(this.filtro.id.toString());
 
       const matchNome =
-        this.filtro.nome === '' ||
+        !this.filtro.nome ||
         u.nome.toLowerCase().includes(this.filtro.nome.toLowerCase());
 
       const matchRole =
-        this.filtro.roleId === 0 ||
+        !this.filtro.roleId ||
         u.roleId === this.filtro.roleId;
 
       return matchId && matchNome && matchRole;
     });
+
+    this.page = 1;
   }
 
   editar(id: number) {

@@ -77,7 +77,7 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (dblclick)="onRowDoubleClick(row)"
-        (click)="selectedRow(row)" [class.row-selected]="selectedRow?.id === row.id"></tr>
+        (click)="selectRow(row)" [class.row-selected]="selectedRow?.id === row.id"></tr>
 
     </table>
 
@@ -86,7 +86,7 @@
 
       <div class="pagination-info">
         Mostrando {{ (page - 1) * pageSize + 1 }} -
-        {{ Math.min(page * pageSize, filtered.length) }}
+        {{ showingEnd  }}
         de {{ filtered.length }}
       </div>
 

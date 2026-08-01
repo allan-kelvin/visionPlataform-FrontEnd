@@ -37,9 +37,15 @@ export class ClienteListComponent implements OnInit {
   page = 1;
   pageSize = 5;
   filtered: any[] = [];
+  clientes: Cliente[] = [];
   filtroForm!: FormGroup;
 
-  Math = Math;
+  get showingEnd() {
+    return Math.min(
+      this.page * this.pageSize,
+      this.filtered.length
+    );
+  }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -58,12 +64,25 @@ export class ClienteListComponent implements OnInit {
     this.load();
   }
 
+
+  private calcularPaginacao() {
+
+    this.totalPages = Math.ceil(this.filtered.length / this.pageSize);
+
+    this.pages = Array.from(
+      { length: this.totalPages },
+      (_, i) => i + 1
+    );
+
+  }
+
   load() {
-    this.service.getAll().subscribe((data) => {
-      this.filtered = data; // 👈 ESSENCIAL
+    this.service.getAll().subscribe(data => {
+      this.clientes = data;
+      this.filtered = [...data];
+      this.page = 1;
+      this.calcularPaginacao();
       this.atualizarPagina();
-      this.totalPages = Math.ceil(this.filtered.length / this.pageSize);
-      this.pages = Array(this.totalPages).fill(0);
     });
   }
 
@@ -76,6 +95,7 @@ export class ClienteListComponent implements OnInit {
 
   irParaPagina(p: number) {
     this.page = p;
+    this.filtered
     this.atualizarPagina();
   }
 
@@ -96,7 +116,7 @@ export class ClienteListComponent implements OnInit {
   filtrar() {
     const { id, nome } = this.filtroForm.value;
 
-    this.filtered = this.dataSource.data.filter((c: Cliente) => {
+    this.filtered = this.clientes.filter((c: Cliente) => {
       return (
         (!id || c.id.toString().includes(id)) &&
         (!nome || c.nome.toLowerCase().includes(nome.toLowerCase()))

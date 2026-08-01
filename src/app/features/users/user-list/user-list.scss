@@ -137,31 +137,20 @@ tbody tr:hover {
 }
 
 /* AÇÕES */
+.actions-header {
+  text-align: right;
+  padding-right: 16px; // mesmo padding do td
+}
 
 .actions-col {
+  padding-right: 16px;
+}
+
+.actions-buttons {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 8px;
-}
-
-th:nth-child(1),
-td:nth-child(1) {
-  width: 80px;
-}
-
-th:nth-child(2),
-td:nth-child(2) {
-  width: 40%;
-}
-
-th:nth-child(3),
-td:nth-child(3) {
-  width: 10%;
-}
-
-th:nth-child(4),
-td:nth-child(4) {
-  text-align: center;
-  width: 180px;
 }
 
 .btn-edit,
